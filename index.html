@@ -15,7 +15,7 @@
   <!-- Navigation -->
   <header class="navigation-bar">
     <div class="logo">
-      <span>NIIQUE INVESTORS</span>
+      <span>NQ INVESTORS</span>
     </div>
     <nav class="nav-list">
       <ul class="nav-links">
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
     navLinks.forEach(link => {
-      link.addEventListener('click', fuction(e) {
+      link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetSection = this.getAttribute('data-target');
         showSection(targetSection);
