@@ -629,7 +629,7 @@ button, a button {
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       width: 100%;
-      max-width:700px
+      max-width: 700px;
       position: relative;
 }
 
@@ -646,7 +646,7 @@ button, a button {
       border-radius: 12px;
       position: absolute;
       width: 100%;
-      max-width:600px
+      max-width: 600px;
     }
 
     .login-box h2 {
@@ -750,9 +750,9 @@ button, a button {
       display: none;
     }
 
-     @media (max-width: 400px) {
+     @media (max-width: 480px) {
       .login-box {
-        padding: 30px 20px;
+        padding: 20px 10px;
       }
       .content-section {
         padding: 1.5rem;
@@ -768,4 +768,4 @@ button, a button {
         margin-bottom: 1rem;
       }
     }
-}
+
