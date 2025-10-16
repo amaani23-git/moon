@@ -748,7 +748,7 @@ button, a button {
       display: none;
     }
 
-     @media (max-width: 480px) {
+    @media (max-width: 480px) {
       .login-box {
         padding: 20px 10px;
       }
@@ -765,5 +765,20 @@ button, a button {
       .logo {
         margin-bottom: 1rem;
       }
+      .nav-toggle { display: inline-block; }
+      .nav-list { display: none; }
+      .nav-list.open { display: block; position: absolute; top: 64px; right: 16px; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.12); z-index: 50; }
+      .nav-links { flex-direction: column; gap: .5rem; }
     }
+ /* Navigation toggle (mobile) */
+.nav-toggle { display: none; background: transparent; border: 0; cursor: pointer; padding: .5rem; }
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  width: 28px; height: 3px; background: #222; display: block; border-radius: 2px; position: relative;
+}
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after { content: ""; position: absolute; left: 0; }
+.nav-toggle .hamburger::before { top: -8px; }
+.nav-toggle .hamburger::after { top: 8px; }
 
