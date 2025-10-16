@@ -35,18 +35,16 @@ button:hover { transform: scale(1.05); }
 body {
   
   height: 100vh;
-  position: relative;
   background-color: orange; /* For browsers that do not support gradients */
   background-image: linear-gradient(to bottom right, orange, yellow);
   font-family: 'Segoe UI', Tahoma, sans-serif;
-  
   color: #333;
   line-height: 1.6;
 }
 
 /* Container */
 .container {
-  max-width: 1200px;
+  max-width: auto;
   margin: auto;
   padding: 20px;
   position: relative;
@@ -513,7 +511,7 @@ button, a button {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  background: orange;
+  background: black;
   color: #fff;
   cursor: pointer;
   z-index: 5;
@@ -625,11 +623,11 @@ button, a button {
 
 .w3-modal {
       background: skyblue;
-      padding: 40px 30px;
+      padding: 30px 20px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       width: 100%;
-      max-width: 700px;
+      max-width: auto;
       position: relative;
 }
 
@@ -637,16 +635,16 @@ button, a button {
         
       border-radius: 12px;
       background: skyblue;
- }
+}
 
 
- .login-box {
+.login-box {
       background: skyblue;
-      padding: 40px 30px;
+      padding: 30px 20px;
       border-radius: 12px;
       position: absolute;
       width: 100%;
-      max-width: 600px;
+      max-width: auto;
     }
 
     .login-box h2 {
@@ -655,7 +653,7 @@ button, a button {
       color: #333;
     }
     .login-btn {
-      padding: 15px;
+      padding: 10px;
     }
     .form-group {
       position: relative;
@@ -675,7 +673,7 @@ button, a button {
     .form-group input:focus {
       border-color: #3498db;
       outline: none;
-     background: #fff;
+      background: #fff;
     }
 
     .form-group label {
@@ -725,7 +723,7 @@ button, a button {
     .form-options label {
       font-size: 14px;
     }
-     .login-btn {
+    .login-btn {
       width: 100%;
       padding: 12px;
       border: none;
