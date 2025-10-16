@@ -17,6 +17,9 @@
     <div class="logo">
       <span>NQ INVESTORS</span>
     </div>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="hamburger"></span>
+  </button>
     <nav class="nav-list">
       <ul class="nav-links">
         <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
@@ -64,17 +67,15 @@
 
       <button type="submit" class="login-btn">Login</button>
     </form>
-
-          <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
         <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button><br>
         <span class="w3-right w3-padding w3-hide-small">Don't have account? <a href="reg.html">Register</a></span><br>
         <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
       </div>
-  </div>
     </div>
-  </div>
-</div>
-
+    </div>
+    </div>
+    </div>
     </nav>
   </header>
 
@@ -493,5 +494,35 @@ backBtn.addEventListener("click", function() {
   })
 })
 
+
+<script>
+// Navigation toggle (mobile) behavior
+document.addEventListener('DOMContentLoaded', function () {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navList = document.querySelector('.nav-list');
+  if (!navToggle || !navList) return;
+  navToggle.addEventListener('click', () => {
+    const opened = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', opened);
+  });
+  // Close menu when a nav link is clicked (useful on mobile)
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navList.classList.contains('open')) {
+        navList.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+   // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navList.contains(e.target) && !navToggle.contains(e.target)) {
+      if (navList.classList.contains('open')) {
+        navList.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+});
 
 </script>
