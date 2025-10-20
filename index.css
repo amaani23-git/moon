@@ -98,6 +98,7 @@ body {
 }
 .nav .list {
   display: none;
+  list-style: none;
   transition:all 0.4;
 }
 .nav .list li a {
