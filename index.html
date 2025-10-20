@@ -20,13 +20,17 @@
   <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="true">
     <span class="hamburger"></span>
   </button>
-    <nav class="nav-list">
-      <ul class="nav-links">
+    <nav class="nav">
+      <div class="top">
+        <button class="menu-btn" onclick="openMenu(this)">Menu</button>
+      </div>
+      <ul class="list">
         <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
         <li><a href="#about" class="nav-link" data-target="about">About</a></li>
         <li><a href="#services" class="nav-link" data-target="services">Services</a></li>
         <li><a href="#contact" class="nav-link" data-target="contact">Contact us</a></li>
       </ul>
+    </nav>
       <div class="w3-container">
 
   <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
@@ -76,7 +80,7 @@
     </div>
     </div>
     </div>
-    </nav>
+    
   </header>
 
 
@@ -458,7 +462,7 @@ document.querySelectorAll(".image-card").forEach(card => {
 
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
-         eyeIcon.innerHTML = '<path d="M12 5c-5 0-9.27 3.11-11 7 1.73 3.89 6 7 11 7 2.4 0 4.7-.81 6.53-2.2l1.25 1.25 1.41-1.41-16-16L2.1 3.51l3.89 3.89C3.95 8.7 2 10.21 1 12c1.73 3.89 6 7 11 7 2.68 0 5.1-.94 7.01-2.5l2.38 2.38 1.41-1.41L3.51 2.1 2.1 3.51 5.17 6.6C3.05 8.09 1.47 10.01 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-.47-1.99-2.05-3.91-4.17-5.4L21.9 3.5 20.5 2.1l-2.18 2.18C16.1 2.87 14.1 2 12 2c-.73 0-1.44.09-2.11.26L12 5z"/>';
+        eyeIcon.innerHTML = '<path d="M12 5c-5 0-9.27 3.11-11 7 1.73 3.89 6 7 11 7 2.4 0 4.7-.81 6.53-2.2l1.25 1.25 1.41-1.41-16-16L2.1 3.51l3.89 3.89C3.95 8.7 2 10.21 1 12c1.73 3.89 6 7 11 7 2.68 0 5.1-.94 7.01-2.5l2.38 2.38 1.41-1.41L3.51 2.1 2.1 3.51 5.17 6.6C3.05 8.09 1.47 10.01 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-.47-1.99-2.05-3.91-4.17-5.4L21.9 3.5 20.5 2.1l-2.18 2.18C16.1 2.87 14.1 2 12 2c-.73 0-1.44.09-2.11.26L12 5z"/>';
       } else {
         passwordField.type = 'password';
         eyeIcon.innerHTML = '<path d="M12 5C7 5 2.7 8.11 1 12c1.7 3.89 6 7 11 7s9.3-3.11 11-7c-1.7-3.89-6-7-11-7zm0 12a5 5 0 110-10 5 5 0 010 10z"/><circle cx="12" cy="12" r="2.5"/>';
@@ -483,9 +487,9 @@ var backBtn = document.querySelector(".back-btn");
 widow.addEventListener("scroll", function() {
   if (this.pageYOffset > 100) { 
     backBtn.classList.add("active");
-   } else {
+  } else {
     backBtn.classList.remove("active");
-   }
+  }
 });
 backBtn.addEventListener("click", function() {
   window.scrollTo({
@@ -494,35 +498,16 @@ backBtn.addEventListener("click", function() {
   })
 })
 
+function openMenu(e) {
+  var menuList = document.querySelector('.nav .list');
+  if (e.innerHTML == "Menu") {
+    menuList.style.display = "block";
+    e.innerHTML = "Close";
+  } else {
+    menuList.style.display = "none";
+    e.innerHTML = "Menu";
+  }
+}
 
-<script>
-// Navigation toggle (mobile) behavior
-document.addEventListener('DOMContentLoaded', function () {
-  const navToggle = document.querySelector('.nav-toggle');
-  const navList = document.querySelector('.nav-list');
-  if (!navToggle || !navList) return;
-  navToggle.addEventListener('click', () => {
-    const opened = navList.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', opened);
-  });
-  // Close menu when a nav link is clicked (useful on mobile)
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (navList.classList.contains('open')) {
-        navList.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-   // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!navList.contains(e.target) && !navToggle.contains(e.target)) {
-      if (navList.classList.contains('open')) {
-        navList.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
-});
 
 </script>
