@@ -31,6 +31,8 @@
         <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
         <li><a href="#about" class="nav-link" data-target="about">About</a></li>
         <li><a href="#services" class="nav-link" data-target="services">Services</a></li>
+        <li><a href="#projects" class="nav-link" data-target="projects">Projects</a></li>
+        <li><a href="#gallery" class="nav-link" data-target="gallery">Gallery</a></li>
         <li><a href="#contact" class="nav-link" data-target="contact">Contact us</a></li>
       </ul>
     </nav>
@@ -39,52 +41,247 @@
       <button id="registerButton" class="w3-button w3-blue w3-large">Register</button>
     </div>
 
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;border-radius: 12px;">
-  
-      <div class="w3-center"><br>
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-        <img src="images/IMG-20241017-WA0007.jpg" alt="Avatar" class="avatar-image w3-circle w3-margin-top">
-      </div>
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeAuthModal">&times;</span>
+        
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+          <div class="form-header">
+            <div class="logo-animation">
+              <img src="images/IMG-20241017-WA0007.jpg" alt="Avatar" class="w3-circle pulse">
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to continue to your account</p>
+          </div>
+          
+          <div class="social-login">
+            <button type="button" class="social-btn google">
+              <i class="bi bi-google"></i>
+              <span>Continue with Google</span>
+            </button>
+            <button type="button" class="social-btn facebook">
+              <i class="bi bi-facebook"></i>
+              <span>Continue with Facebook</span>
+            </button>
+          </div>
 
-      <div class="login-box">
-    <h2>Login</h2>
-    <form onsubmit="return validateForm()">
-      <div class="form-group">
-        <input type="text" id="username" placeholder=" " required />
-        <label for="username">Username</label>
-      </div>
+          <div class="divider">
+            <span>or</span>
+          </div>
+          
+          <div class="form-group">
+            <div class="input-icon">
+              <i class="bi bi-envelope"></i>
+              <input type="email" id="loginEmail" placeholder=" " required>
+              <label for="loginEmail">Email Address</label>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <input type="password" id="password" placeholder=" " required />
-        <label for="password">Password</label>
-        <button type="button" class="toggle-visibility" onclick="togglePassword()" title="Toggle password visibility" aria-label="Toggle password visibility">
-          <!-- Eye icon (visible) -->
-          <svg id="eyeIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 5C7 5 2.7 8.11 1 12c1.7 3.89 6 7 11 7s9.3-3.11 11-7c-1.7-3.89-6-7-11-7zm0 12a5 5 0 110-10 5 5 0 010 10z"/>
-            <circle cx="12" cy="12" r="2.5"/>
-          </svg>
-        </button>
-      </div>
+          <div class="form-group">
+            <div class="input-icon">
+              <i class="bi bi-lock"></i>
+              <input type="password" id="loginPassword" placeholder=" " required>
+              <label for="loginPassword">Password</label>
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength" id="loginPasswordStrength"></div>
+          </div>
 
-      <div id="errorMsg" class="error">Please enter both username and password.</div>
+          <div class="error-message" id="loginError">
+            <i class="bi bi-exclamation-circle"></i>
+            <span></span>
+          </div>
 
-      <div class="form-options">
-        <label><input type="checkbox" /> Remember me</label>
-      </div>
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="rememberMe">
+              <span class="checkmark"></span>
+              <span class="label-text">Remember me</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
 
-      <button type="submit" class="login-btn">Login</button>
-    </form>
-      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-        <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-        <span class="w3-right w3-hide-small">Don't have account? <a href="reg.html">Register</a></span>
-        <span class="w3-right w3-hide-small">Forgot <a href="#">password?</a></span>
+          <button type="submit" class="auth-submit">
+            <span>Log In</span>
+            <div class="loader"></div>
+          </button>
+
+          <div class="form-footer">
+            <p>Don't have an account?</p>
+            <button type="button" class="switch-form" data-target="register">Create Account</button>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form">
+          <div class="form-header">
+            <div class="logo-animation">
+              <img src="images/IMG-20241017-WA0007.jpg" alt="Avatar" class="w3-circle pulse">
+            </div>
+            <h2>Create Account</h2>
+            <p class="subtitle">Join our community today</p>
+          </div>
+
+          <div class="form-progress">
+            <div class="progress-step active" data-step="1">
+              <div class="step-number">1</div>
+              <span>Account</span>
+            </div>
+            <div class="progress-step" data-step="2">
+              <div class="step-number">2</div>
+              <span>Profile</span>
+            </div>
+            <div class="progress-step" data-step="3">
+              <div class="step-number">3</div>
+              <span>Verify</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Account Information -->
+          <div class="form-step active" data-step="1">
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-envelope"></i>
+                <input type="email" id="registerEmail" placeholder=" " required>
+                <label for="registerEmail">Email Address</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-lock"></i>
+                <input type="password" id="registerPassword" placeholder=" " required
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                       title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 characters">
+                <label for="registerPassword">Password</label>
+                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <div class="password-strength" id="registerPasswordStrength">
+                <div class="strength-meter">
+                  <div class="meter-section"></div>
+                  <div class="meter-section"></div>
+                  <div class="meter-section"></div>
+                  <div class="meter-section"></div>
+                </div>
+                <ul class="strength-requirements">
+                  <li data-requirement="length">At least 8 characters</li>
+                  <li data-requirement="uppercase">One uppercase letter</li>
+                  <li data-requirement="lowercase">One lowercase letter</li>
+                  <li data-requirement="number">One number</li>
+                  <li data-requirement="special">One special character</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-lock"></i>
+                <input type="password" id="confirmPassword" placeholder=" " required>
+                <label for="confirmPassword">Confirm Password</label>
+                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Profile Information -->
+          <div class="form-step" data-step="2">
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-person"></i>
+                <input type="text" id="firstName" placeholder=" " required>
+                <label for="firstName">First Name</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-person"></i>
+                <input type="text" id="lastName" placeholder=" " required>
+                <label for="lastName">Last Name</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-phone"></i>
+                <input type="tel" id="phone" placeholder=" " required>
+                <label for="phone">Phone Number</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="bi bi-geo-alt"></i>
+                <input type="text" id="location" placeholder=" " required>
+                <label for="location">Location</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Verification -->
+          <div class="form-step" data-step="3">
+            <div class="verification-section">
+              <div class="verification-info">
+                <i class="bi bi-envelope-check"></i>
+                <p>We've sent a verification code to your email</p>
+                <strong id="verificationEmail"></strong>
+              </div>
+
+              <div class="otp-input-group">
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+              </div>
+
+              <div class="verification-actions">
+                <button type="button" id="resendCode" class="resend-code">
+                  Resend Code
+                  <span class="countdown"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-message" id="registerError">
+            <i class="bi bi-exclamation-circle"></i>
+            <span></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="prev-step" style="display: none;">Back</button>
+            <button type="button" class="next-step">Next</button>
+            <button type="submit" class="auth-submit" style="display: none;">
+              <span>Create Account</span>
+              <div class="loader"></div>
+            </button>
+          </div>
+
+          <div class="terms-privacy">
+            <label class="checkbox-container">
+              <input type="checkbox" id="agreeTerms" required>
+              <span class="checkmark"></span>
+              <span class="label-text">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+            </label>
+          </div>
+
+          <div class="form-footer">
+            <p>Already have an account?</p>
+            <button type="button" class="switch-form" data-target="login">Log In</button>
+          </div>
+        </form>
       </div>
     </div>
-    </div>
-    </div>
-    </div>
-    
   </header>
 
 
@@ -219,8 +416,146 @@
     <p>For 10 years, Niique Investors has supported the needy and the community. We thank everyone who has been with us and welcome all new partners.</p>
   </section>
 </div>
-<section id="services">
+<section id="services" class="content-section">
+  <h2>Our Services</h2>
+  <p class="section-description">We provide comprehensive investment and community support services</p>
   
+  <div class="services-grid">
+    <!-- Investment Services -->
+    <div class="service-card" data-aos="fade-up">
+      <div class="service-icon">
+        <i class="bi bi-graph-up-arrow"></i>
+      </div>
+      <h3>Investment Management</h3>
+      <p>Expert financial guidance and portfolio management to help you grow your wealth sustainably.</p>
+      <ul class="service-features">
+        <li><i class="bi bi-check-circle"></i> Portfolio Optimization</li>
+        <li><i class="bi bi-check-circle"></i> Risk Management</li>
+        <li><i class="bi bi-check-circle"></i> Market Analysis</li>
+      </ul>
+      <button class="service-cta">Learn More</button>
+    </div>
+
+    <!-- Real Estate -->
+    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="service-icon">
+        <i class="bi bi-building"></i>
+      </div>
+      <h3>Real Estate Development</h3>
+      <p>Development of commercial properties including markets, factories, and luxury motels.</p>
+      <ul class="service-features">
+        <li><i class="bi bi-check-circle"></i> Property Development</li>
+        <li><i class="bi bi-check-circle"></i> Commercial Leasing</li>
+        <li><i class="bi bi-check-circle"></i> Facility Management</li>
+      </ul>
+      <button class="service-cta">Learn More</button>
+    </div>
+
+    <!-- Community Support -->
+    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-icon">
+        <i class="bi bi-people"></i>
+      </div>
+      <h3>Community Development</h3>
+      <p>Supporting local communities through education, infrastructure, and economic empowerment.</p>
+      <ul class="service-features">
+        <li><i class="bi bi-check-circle"></i> Education Support</li>
+        <li><i class="bi bi-check-circle"></i> Infrastructure Projects</li>
+        <li><i class="bi bi-check-circle"></i> Economic Programs</li>
+      </ul>
+      <button class="service-cta">Learn More</button>
+    </div>
+
+    <!-- Agricultural Support -->
+    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+      <div class="service-icon">
+        <i class="bi bi-flower1"></i>
+      </div>
+      <h3>Agricultural Development</h3>
+      <p>Supporting farmers and agricultural initiatives to enhance food security and economic growth.</p>
+      <ul class="service-features">
+        <li><i class="bi bi-check-circle"></i> Modern Farming</li>
+        <li><i class="bi bi-check-circle"></i> Equipment Support</li>
+        <li><i class="bi bi-check-circle"></i> Market Access</li>
+      </ul>
+      <button class="service-cta">Learn More</button>
+    </div>
+  </div>
+
+  <!-- Statistics Counter -->
+  <div class="statistics-section">
+    <div class="stat-card" data-aos="zoom-in">
+      <i class="bi bi-people-fill"></i>
+      <div class="stat-number" data-target="5000">0</div>
+      <p>Community Members Supported</p>
+    </div>
+    
+    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+      <i class="bi bi-building-fill"></i>
+      <div class="stat-number" data-target="50">0</div>
+      <p>Projects Completed</p>
+    </div>
+    
+    <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+      <i class="bi bi-graph-up"></i>
+      <div class="stat-number" data-target="95">0</div>
+      <p>Success Rate</p>
+    </div>
+    
+    <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+      <i class="bi bi-calendar-check"></i>
+      <div class="stat-number" data-target="10">0</div>
+      <p>Years of Experience</p>
+    </div>
+  </div>
+
+  <!-- Service Request Form -->
+  <div class="service-form-container" data-aos="fade-up">
+    <h3>Request a Service</h3>
+    <form id="serviceRequestForm" class="service-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="serviceType">Service Type</label>
+          <select id="serviceType" required>
+            <option value="">Select a Service</option>
+            <option value="investment">Investment Management</option>
+            <option value="realestate">Real Estate Development</option>
+            <option value="community">Community Development</option>
+            <option value="agriculture">Agricultural Support</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget Range</label>
+          <select id="budget" required>
+            <option value="">Select Budget Range</option>
+            <option value="small">$1,000 - $10,000</option>
+            <option value="medium">$10,000 - $50,000</option>
+            <option value="large">$50,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="timeline">Expected Timeline</label>
+          <input type="date" id="timeline" required>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority Level</label>
+          <select id="priority" required>
+            <option value="">Select Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="requirements">Special Requirements</label>
+        <textarea id="requirements" rows="4" placeholder="Describe your specific needs..."></textarea>
+      </div>
+      <button type="submit" class="submit-service-request">Submit Request</button>
+    </form>
+  </div>
 </section>
 
 <section id="contact" class="content-section">
@@ -401,44 +736,368 @@
       const switchForms = document.querySelectorAll('.switch-form');
       const togglePasswordButtons = document.querySelectorAll('.toggle-password');
 
-      // Show/hide modal functions
+      // Show/hide modal functions with enhanced animations
       function showModal() {
         authModal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          authModal.querySelector('.modal-content').classList.add('show');
+        }, 10);
       }
 
       function hideModal() {
-        authModal.classList.remove('show');
-        document.body.style.overflow = '';
+        const modalContent = authModal.querySelector('.modal-content');
+        modalContent.classList.remove('show');
+        setTimeout(() => {
+          authModal.classList.remove('show');
+          document.body.style.overflow = '';
+          resetForms();
+        }, 300);
       }
 
-      // Switch between login and register forms
+      function resetForms() {
+        // Reset form states
+        loginForm.reset();
+        registerForm.reset();
+        document.querySelectorAll('.error-message span').forEach(el => el.textContent = '');
+        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+        document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
+        document.querySelector('.form-step[data-step="1"]').classList.add('active');
+        document.querySelector('.progress-step[data-step="1"]').classList.add('active');
+        
+        // Reset password strength indicators
+        document.querySelectorAll('.password-strength').forEach(el => {
+          el.querySelectorAll('.meter-section').forEach(section => section.className = 'meter-section');
+          el.querySelectorAll('.strength-requirements li').forEach(req => req.classList.remove('met'));
+        });
+
+        // Reset buttons
+        document.querySelector('.prev-step').style.display = 'none';
+        document.querySelector('.next-step').style.display = 'block';
+        document.querySelector('.auth-submit').style.display = 'none';
+      }
+
+      // Enhanced form switching with animations
       function switchForm(target) {
-        if (target === 'register') {
-          loginForm.classList.remove('active');
-          registerForm.classList.add('active');
-        } else {
-          registerForm.classList.remove('active');
-          loginForm.classList.add('active');
-        }
+        const currentForm = target === 'register' ? loginForm : registerForm;
+        const newForm = target === 'register' ? registerForm : loginForm;
+        
+        // Start exit animation
+        currentForm.classList.add('fade-out');
+        
+        setTimeout(() => {
+          currentForm.classList.remove('active', 'fade-out');
+          newForm.classList.add('active', 'fade-in');
+          resetForms();
+          
+          setTimeout(() => {
+            newForm.classList.remove('fade-in');
+          }, 300);
+        }, 300);
       }
 
-      // Toggle password visibility
-      togglePasswordButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const input = this.previousElementSibling;
-          const icon = this.querySelector('i');
-          if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.replace('bi-eye', 'bi-eye-slash');
+      // Password strength checker
+      function checkPasswordStrength(password, strengthEl) {
+        const requirements = {
+          length: password.length >= 8,
+          uppercase: /[A-Z]/.test(password),
+          lowercase: /[a-z]/.test(password),
+          number: /\d/.test(password),
+          special: /[!@#$%^&*]/.test(password)
+        };
+
+        const meterSections = strengthEl.querySelectorAll('.meter-section');
+        const requirementsList = strengthEl.querySelectorAll('.strength-requirements li');
+        let strength = 0;
+
+        // Update requirements list
+        Object.entries(requirements).forEach(([req, met], index) => {
+          const reqElement = requirementsList[index];
+          if (met) {
+            reqElement.classList.add('met');
+            strength++;
           } else {
-            input.type = 'password';
-            icon.classList.replace('bi-eye-slash', 'bi-eye');
+            reqElement.classList.remove('met');
+          }
+        });
+
+        // Update strength meter
+        meterSections.forEach((section, index) => {
+          section.className = 'meter-section';
+          if (index < strength) {
+            section.classList.add(
+              strength <= 2 ? 'weak' :
+              strength <= 3 ? 'medium' :
+              strength <= 4 ? 'strong' : 'very-strong'
+            );
+          }
+        });
+
+        return strength;
+      }
+
+      // Multi-step registration
+      const progressSteps = document.querySelectorAll('.progress-step');
+      const formSteps = document.querySelectorAll('.form-step');
+      const prevStepBtn = document.querySelector('.prev-step');
+      const nextStepBtn = document.querySelector('.next-step');
+      const submitBtn = registerForm.querySelector('.auth-submit');
+      let currentStep = 1;
+
+      function updateFormStep(step) {
+        formSteps.forEach(s => s.classList.remove('active'));
+        progressSteps.forEach(s => s.classList.remove('active'));
+        
+        const newFormStep = document.querySelector(`.form-step[data-step="${step}"]`);
+        const newProgressStep = document.querySelector(`.progress-step[data-step="${step}"]`);
+        
+        newFormStep.classList.add('active');
+        newProgressStep.classList.add('active');
+        
+        // Update buttons
+        prevStepBtn.style.display = step === 1 ? 'none' : 'block';
+        nextStepBtn.style.display = step === 3 ? 'none' : 'block';
+        submitBtn.style.display = step === 3 ? 'block' : 'none';
+
+        // Mark previous steps as completed
+        progressSteps.forEach(s => {
+          const stepNum = parseInt(s.dataset.step);
+          if (stepNum < step) {
+            s.classList.add('completed');
+          } else {
+            s.classList.remove('completed');
+          }
+        });
+      }
+
+      // OTP Input Handling
+      const otpInputs = document.querySelectorAll('.otp-input');
+      otpInputs.forEach((input, index) => {
+        input.addEventListener('keyup', (e) => {
+          if (e.key >= '0' && e.key <= '9') {
+            if (index < otpInputs.length - 1) {
+              otpInputs[index + 1].focus();
+            }
+          } else if (e.key === 'Backspace') {
+            if (index > 0) {
+              otpInputs[index - 1].focus();
+            }
           }
         });
       });
 
+      // Resend Code Functionality
+      const resendButton = document.getElementById('resendCode');
+      function startResendTimer() {
+        let timeLeft = 30;
+        resendButton.disabled = true;
+        
+        const countdown = resendButton.querySelector('.countdown');
+        countdown.textContent = `(${timeLeft}s)`;
+        
+        const timer = setInterval(() => {
+          timeLeft--;
+          countdown.textContent = `(${timeLeft}s)`;
+          
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            resendButton.disabled = false;
+            countdown.textContent = '';
+          }
+        }, 1000);
+      }
+
       // Event Listeners
+      prevStepBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateFormStep(currentStep);
+        }
+      });
+
+      nextStepBtn.addEventListener('click', () => {
+        const isValid = validateStep(currentStep);
+        if (isValid && currentStep < 3) {
+          currentStep++;
+          updateFormStep(currentStep);
+          if (currentStep === 3) {
+            // Show verification email
+            const email = document.getElementById('registerEmail').value;
+            document.getElementById('verificationEmail').textContent = email;
+            startResendTimer();
+          }
+        }
+      });
+
+      resendButton.addEventListener('click', () => {
+        if (!resendButton.disabled) {
+          // Simulate sending new code
+          startResendTimer();
+        }
+      });
+
+      // Password strength monitoring
+      document.querySelectorAll('input[type="password"]').forEach(input => {
+        const strengthEl = input.closest('.form-group').querySelector('.password-strength');
+        if (strengthEl) {
+          input.addEventListener('input', () => {
+            checkPasswordStrength(input.value, strengthEl);
+          });
+        }
+      });
+
+      // Social login handlers
+      document.querySelector('.google').addEventListener('click', () => {
+        console.log('Google login clicked');
+        // Implement Google login
+      });
+
+      document.querySelector('.facebook').addEventListener('click', () => {
+        console.log('Facebook login clicked');
+        // Implement Facebook login
+      });
+
+      // Form validation helper
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      function validateStep(step) {
+        const errorEl = document.getElementById('registerError');
+        errorEl.querySelector('span').textContent = '';
+
+        switch (step) {
+          case 1:
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+
+            if (!validateEmail(email)) {
+              showError('Please enter a valid email address');
+              return false;
+            }
+
+            if (checkPasswordStrength(password, document.getElementById('registerPasswordStrength')) < 3) {
+              showError('Please create a stronger password');
+              return false;
+            }
+
+            if (password !== confirmPass) {
+              showError('Passwords do not match');
+              return false;
+            }
+            break;
+
+          case 2:
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+
+            if (!firstName || !lastName) {
+              showError('Please enter your full name');
+              return false;
+            }
+
+            if (!phone) {
+              showError('Please enter your phone number');
+              return false;
+            }
+
+            if (!location) {
+              showError('Please enter your location');
+              return false;
+            }
+            break;
+        }
+
+        return true;
+      }
+
+      function showError(message) {
+        const errorEl = document.getElementById('registerError');
+        errorEl.querySelector('span').textContent = message;
+        errorEl.style.display = 'flex';
+        setTimeout(() => {
+          errorEl.classList.add('show');
+        }, 10);
+      }
+
+      // Form submissions
+      loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('.auth-submit');
+        const loader = submitBtn.querySelector('.loader');
+        const buttonText = submitBtn.querySelector('span');
+        
+        try {
+          submitBtn.disabled = true;
+          loader.style.display = 'block';
+          buttonText.style.opacity = '0';
+
+          const email = document.getElementById('loginEmail').value.trim();
+          const password = document.getElementById('loginPassword').value;
+          const remember = document.getElementById('rememberMe').checked;
+
+          // Simulate API call
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          console.log('Login:', { email, password, remember });
+          
+          hideModal();
+        } catch (error) {
+          showError('Login failed. Please try again.');
+        } finally {
+          submitBtn.disabled = false;
+          loader.style.display = 'none';
+          buttonText.style.opacity = '1';
+        }
+      });
+
+      registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('.auth-submit');
+        const loader = submitBtn.querySelector('.loader');
+        const buttonText = submitBtn.querySelector('span');
+
+        try {
+          // Validate OTP
+          const otp = Array.from(otpInputs).map(input => input.value).join('');
+          if (otp.length !== 6) {
+            showError('Please enter the complete verification code');
+            return;
+          }
+
+          submitBtn.disabled = true;
+          loader.style.display = 'block';
+          buttonText.style.opacity = '0';
+
+          // Gather all form data
+          const formData = {
+            email: document.getElementById('registerEmail').value.trim(),
+            password: document.getElementById('registerPassword').value,
+            firstName: document.getElementById('firstName').value.trim(),
+            lastName: document.getElementById('lastName').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            location: document.getElementById('location').value.trim(),
+            otp: otp
+          };
+
+          // Simulate API call
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          console.log('Register:', formData);
+          
+          hideModal();
+        } catch (error) {
+          showError('Registration failed. Please try again.');
+        } finally {
+          submitBtn.disabled = false;
+          loader.style.display = 'none';
+          buttonText.style.opacity = '1';
+        }
+      });
+
+      // Initialize event listeners
       loginButton.addEventListener('click', () => {
         showModal();
         switchForm('login');
@@ -461,34 +1120,42 @@
         });
       });
 
-      // Form submissions
-      document.getElementById('loginFormElement').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        const remember = document.getElementById('rememberMe').checked;
-        
-        // Add your login logic here
-        console.log('Login:', { email, password, remember });
-        hideModal();
+      // Handle Enter key
+      authModal.querySelectorAll('input').forEach(input => {
+        input.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const step = this.closest('.form-step');
+            if (step) {
+              const stepNumber = parseInt(step.dataset.step);
+              if (stepNumber < 3) {
+                nextStepBtn.click();
+              } else {
+                const form = this.closest('form');
+                form.querySelector('button[type="submit"]').click();
+              }
+            } else {
+              const form = this.closest('form');
+              form.querySelector('button[type="submit"]').click();
+            }
+          }
+        });
       });
 
-      document.getElementById('registerFormElement').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-          document.getElementById('registerError').textContent = 'Passwords do not match';
-          return;
-        }
-
-        // Add your registration logic here
-        console.log('Register:', { firstName, lastName, email, password });
-        hideModal();
+      // Password visibility toggles
+      togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const input = this.closest('.input-icon').querySelector('input');
+          const icon = this.querySelector('i');
+          
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('bi-eye', 'bi-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.replace('bi-eye-slash', 'bi-eye');
+          }
+        });
       });
     }
 
