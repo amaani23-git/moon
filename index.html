@@ -22,18 +22,22 @@
     </div>
     <nav class="nav">
       <div class="top">
-        <button class="menu-btn" onclick="openMenu(this)">Menu</button>
+        <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="navList">
+          <span class="menu-icon"></span>
+          <span class="menu-text">Menu</span>
+        </button>
       </div>
-      <ul class="list">
+      <ul class="list" id="navList">
         <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
         <li><a href="#about" class="nav-link" data-target="about">About</a></li>
         <li><a href="#services" class="nav-link" data-target="services">Services</a></li>
         <li><a href="#contact" class="nav-link" data-target="contact">Contact us</a></li>
       </ul>
     </nav>
-      <div class="w3-container">
-
-  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+    <div class="auth-buttons">
+      <button id="loginButton" class="w3-button w3-green w3-large">Login</button>
+      <button id="registerButton" class="w3-button w3-blue w3-large">Register</button>
+    </div>
 
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;border-radius: 12px;">
@@ -323,24 +327,39 @@
   <script>
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-      // Navigation functionality
+      // Initialize all components
       initializeNavigation();
-      
-      // Image slider functionality
       initializeImageSlider();
-      
-      // Image cards functionality
       initializeImageCards();
-      
-      // Back to top button
       initializeBackToTop();
+      initializeAuth();
     });
 
-    // Navigation
+    // Navigation with Toggle
     function initializeNavigation() {
+      const menuToggle = document.getElementById('menuToggle');
+      const navList = document.getElementById('navList');
       const navLinks = document.querySelectorAll('.nav-link');
       const contentSections = document.querySelectorAll('.content-section');
       
+      // Toggle menu functionality
+      menuToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        navList.classList.toggle('show');
+        this.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav') && navList.classList.contains('show')) {
+          navList.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.classList.remove('active');
+        }
+      });
+      
+      // Section navigation
       function showSection(sectionId) {
         contentSections.forEach(section => section.classList.remove('active'));
         document.getElementById(sectionId).classList.add('active');
@@ -351,6 +370,13 @@
             link.classList.add('active');
           }
         });
+
+        // Close mobile menu after navigation
+        if (window.innerWidth < 768) {
+          navList.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.classList.remove('active');
+        }
       }
       
       navLinks.forEach(link => {
@@ -362,6 +388,108 @@
       });
       
       showSection('home');
+    }
+
+    // Authentication System
+    function initializeAuth() {
+      const loginButton = document.getElementById('loginButton');
+      const registerButton = document.getElementById('registerButton');
+      const authModal = document.getElementById('authModal');
+      const closeAuthModal = document.getElementById('closeAuthModal');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const switchForms = document.querySelectorAll('.switch-form');
+      const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
+      // Show/hide modal functions
+      function showModal() {
+        authModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function hideModal() {
+        authModal.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      // Switch between login and register forms
+      function switchForm(target) {
+        if (target === 'register') {
+          loginForm.classList.remove('active');
+          registerForm.classList.add('active');
+        } else {
+          registerForm.classList.remove('active');
+          loginForm.classList.add('active');
+        }
+      }
+
+      // Toggle password visibility
+      togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const input = this.previousElementSibling;
+          const icon = this.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('bi-eye', 'bi-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.replace('bi-eye-slash', 'bi-eye');
+          }
+        });
+      });
+
+      // Event Listeners
+      loginButton.addEventListener('click', () => {
+        showModal();
+        switchForm('login');
+      });
+
+      registerButton.addEventListener('click', () => {
+        showModal();
+        switchForm('register');
+      });
+
+      closeAuthModal.addEventListener('click', hideModal);
+
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) hideModal();
+      });
+
+      switchForms.forEach(button => {
+        button.addEventListener('click', function() {
+          switchForm(this.dataset.target);
+        });
+      });
+
+      // Form submissions
+      document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const remember = document.getElementById('rememberMe').checked;
+        
+        // Add your login logic here
+        console.log('Login:', { email, password, remember });
+        hideModal();
+      });
+
+      document.getElementById('registerFormElement').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+          document.getElementById('registerError').textContent = 'Passwords do not match';
+          return;
+        }
+
+        // Add your registration logic here
+        console.log('Register:', { firstName, lastName, email, password });
+        hideModal();
+      });
     }
 
     // Image Slider
