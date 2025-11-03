@@ -1,9 +1,5 @@
 .navigation-bar { display: flex; justify-content: space-between; padding: 15px 30px; background: #332; color: #fff; }
 .logo span { color: #61dafb; font-weight: bold; font-size: 1.5rem; }
-.nav-list ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; }
-.nav-list ul li a { color: #fff; text-decoration: none; padding: 5px 10px; }
-.nav-list ul li a:hover { background: #CE9058; border-radius: 5px; }
-
 .image-gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
 .image-card { width: 300px; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 10px; }
 .image-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; }
@@ -46,7 +42,7 @@ body {
 .container {
   max-width: auto;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   z-index: 2;
   color: white;
@@ -57,33 +53,30 @@ body {
 /* Navigation */
 .navigation-bar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #332;
   color: white;
-  padding: 15px 30px;
-  position: sticky;
+  padding: 5px 9px;
   top: 0;
-  z-index: 1000;
+  
 }
 
 .logo span {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  color: #61dafb;
+  color: #eda303;
+  font-style: italic;
 }
 .nav {
-  width: 80%;
-  background-color: #348;
+  border-radius: 5px;
+  background-color: rgb(254, 187, 1);
   color: #fff;
 
 }
 .nav .top {
   height: 60px;
   width: 100%;
-  padding: 0 15px;
+  padding: 0 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 .nav .top .menu-btn {
@@ -98,7 +91,6 @@ body {
 }
 .nav .list {
   display: none;
-  list-style: none;
   transition:all 0.4;
 }
 .nav .list li {
@@ -106,10 +98,9 @@ body {
   list-style: none;
 }
 .nav .list li a {
-  display: block;
+  display: flex;
   padding: 6px 15px;
   color: #fff;
-  font-size: 18px;
   width: 100%;
   text-decoration: none;
 }
@@ -128,7 +119,6 @@ body {
   margin-bottom: 20px;
 }
 .home-section h1 {
-  font-size: 70px;
   font-style: italic;
   color: blueviolet;
 }
@@ -139,7 +129,6 @@ body {
   color: white;
   font-weight: bold;
   font-family: sans-serif;
-  font-size: 70px;
   text-shadow: 2px 2px 5px black;
 
 }
@@ -172,7 +161,6 @@ body {
 .content-section h2 {
   color: #2575fc;
   font-weight: bold;
-  font-size: 30px;
   transition: 0.6s ease;
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
@@ -239,7 +227,6 @@ body {
 
 .content-section p {
   color: green;
-  font-size: 25px;
   font-family: sans-serif;
 }
 .projects {
@@ -468,10 +455,10 @@ button, a button {
 /* Subscribe Box */
 .subscribe {
   background: #222;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 9px;
   text-align: center;
-  max-width: 350px;
+  max-width: 330px;
   margin: 20px auto;
 }
 
@@ -481,25 +468,25 @@ button, a button {
 }
 
 .subscribe p {
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 15px;
 }
 
 .subscribe .input {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .subscribe .input input {
   flex: 1;
-  padding: 10px;
+  padding: 8px;
   border-radius: 5px;
   border: none;
   outline: none;
 }
 
 .subscribe .input button {
-  padding: 10px 11px;
+  padding: 3px 5px;
   border: none;
   border-radius: 5px;
   background: #61dafb;
@@ -646,7 +633,7 @@ button, a button {
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       width: 100%;
       max-width: 400px;
-      position: relative;
+      position: absolute;
 }
 
 .w3-center { 
@@ -658,9 +645,9 @@ button, a button {
 
 .login-box {
       background: skyblue;
-      padding: 30px 20px;
+      padding: 20px 10px;
       border-radius: 12px;
-      position: absolute;
+      position: relative;
       width: 100%;
       max-width: 400px;
     }
@@ -768,7 +755,7 @@ button, a button {
 
     @media (max-width: 480px) {
       .login-box {
-        padding: 20px 10px;
+        padding: 10px 10px;
       }
       .content-section {
         padding: 1.5rem;
@@ -776,6 +763,10 @@ button, a button {
       .nav-links {
         flex-wrap: wrap;
         justify-content: center;
+      }
+      .navigation-bar{
+        max-width: fit-content;
+        width: auto;
       }
       .nav-links li {
         margin: 0.5rem;

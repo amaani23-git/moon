@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="description" content="Niique Investors - Supporting the community since 2014">
+  
   <title>NIIQUE INVESTORS</title>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
@@ -17,9 +20,6 @@
     <div class="logo">
       <span>Niique INVESTORS</span>
     </div>
-  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="true">
-    <span class="hamburger"></span>
-  </button>
     <nav class="nav">
       <div class="top">
         <button class="menu-btn" onclick="openMenu(this)">Menu</button>
@@ -40,7 +40,7 @@
   
       <div class="w3-center"><br>
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-        <img src="images/IMG-20241017-WA0007.jpg" alt="Avatar" style="width:50%;border-radius: 20px;" class="w3-circle w3-margin-top">
+        <img src="images/IMG-20241017-WA0007.jpg" alt="Avatar" class="avatar-image w3-circle w3-margin-top">
       </div>
 
       <div class="login-box">
@@ -54,9 +54,9 @@
       <div class="form-group">
         <input type="password" id="password" placeholder=" " required />
         <label for="password">Password</label>
-        <button type="button" class="toggle-visibility" onclick="togglePassword()">
+        <button type="button" class="toggle-visibility" onclick="togglePassword()" title="Toggle password visibility" aria-label="Toggle password visibility">
           <!-- Eye icon (visible) -->
-          <svg id="eyeIcon" viewBox="0 0 24 24">
+          <svg id="eyeIcon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 5C7 5 2.7 8.11 1 12c1.7 3.89 6 7 11 7s9.3-3.11 11-7c-1.7-3.89-6-7-11-7zm0 12a5 5 0 110-10 5 5 0 010 10z"/>
             <circle cx="12" cy="12" r="2.5"/>
           </svg>
@@ -73,8 +73,8 @@
     </form>
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
         <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-        <span class="w3-right w3-padding w3-hide-small">Don't have account? <a href="reg.html">Register</a></span>
-        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+        <span class="w3-right w3-hide-small">Don't have account? <a href="reg.html">Register</a></span>
+        <span class="w3-right w3-hide-small">Forgot <a href="#">password?</a></span>
       </div>
     </div>
     </div>
@@ -142,13 +142,13 @@
   <!-- About Section -->
   <section class="content-section" id="about" >
     <h1 >About Us</h1>
-    <p>Niique Company was established in 2014 by <strong style="color: black;">Collins Niique</strong>. His dream was to support the needy and work with everyone in society.</p>
+    <p>Niique Company was established in 2014 by <strong class="founder-name">Collins Niique</strong>. His dream was to support the needy and work with everyone in society.</p>
     <p>He became an entrepreneur and started building commercial centers such as markets, factories, and motels.</p>
     <div class="partners">
       <h2>Meet some of our partners</h2>
       <div class="partners-1">
-        <img src="images/col.jpg" alt="partner 0ne">
-        <p><strong style="color: white; text-shadow: 2px 2px 5px black;">COLLINS NIIQUE</strong> a Ugandan citizen, He studied at <abbr>Metropolitan International University</abbr> where he took chance to get exposed to the entire community through team work</p>
+        <img src="images/col.jpg" alt="Collins Niique - Company Founder">
+        <p><strong class="partner-name">COLLINS NIIQUE</strong> a Ugandan citizen, He studied at <abbr title="Metropolitan International University">Metropolitan International University</abbr> where he took chance to get exposed to the entire community through team work</p>
       </div>
     </div><br><br>
 
@@ -250,11 +250,11 @@
     <button class="submit-btn">Send Message</button>
   </div>
 
-  <div style="margin-top: 3rem; text-shadow: 1px 1px 3px black;">
+  <div class="office-info">
     <h3>Our office</h3>
-    <p><strong>Adress:</strong>1444 Business Avenue, Suite 500, Kanungu, K 10033</p>
-    <p><strong>Phone:</strong>(256)740-903224</p>
-    <p><strong>Email:</strong>niiqueinvestors@gmail.com</p>
+    <p><strong>Address:</strong> 1444 Business Avenue, Suite 500, Kanungu, K 10033</p>
+    <p><strong>Phone:</strong> (256)740-903224</p>
+    <p><strong>Email:</strong> niiqueinvestors@gmail.com</p>
   </div>
   
 </section>
@@ -321,145 +321,157 @@
 
   <!-- Scripts -->
   <script>
-    //Navigation fuctionality
-document.addEventListener('DOMContentLoaded', function() {
-  const navLinks = document.querySelectorAll('.nav-link');
-  const contentSections = document.querySelectorAll('.content-section');
-  
-    function showSection(sectionId) {
-    contentSections.forEach(section => {
-      section.classList.remove('active');
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Navigation functionality
+      initializeNavigation();
+      
+      // Image slider functionality
+      initializeImageSlider();
+      
+      // Image cards functionality
+      initializeImageCards();
+      
+      // Back to top button
+      initializeBackToTop();
     });
 
-    document.getElementById(sectionId).classList.add('active');
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('data-target') === sectionId) {
-        link.classList.add('active');
+    // Navigation
+    function initializeNavigation() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const contentSections = document.querySelectorAll('.content-section');
+      
+      function showSection(sectionId) {
+        contentSections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-target') === sectionId) {
+            link.classList.add('active');
+          }
+        });
       }
-    });
-
-  }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetSection = this.getAttribute('data-target');
-        showSection(targetSection);
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetSection = this.getAttribute('data-target');
+          showSection(targetSection);
+        });
       });
-    });
+      
+      showSection('home');
+    }
 
-    showSection('home');
-  
-});
-
-  </script>
-</body>
-</html>
-
-<script type="text/javascript">
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
-
-function showSlide(index) {
-  if (index >= slides.length) currentSlide = 0;
-  else if (index < 0) currentSlide = slides.length - 1;
-  else currentSlide = index;
-
-  // Move slides
-  document.querySelector(".slides").style.transform = `translateX(${-currentSlide * 100}%)`;
-
-  // Update dots
-  dots.forEach(dot => dot.classList.remove("active"));
-  dots[currentSlide].classList.add("active");
-}
-
-function changeSlide(n) {
-  showSlide(currentSlide + n);
-}
-
-function setSlide(n) {
-  showSlide(n);
-}
-
-// 🔥 Auto play every 3 seconds
-setInterval(() => {
-  changeSlide(1);
-}, 5000);
-
-document.querySelectorAll(".image-card").forEach(card => {
-  // Initialize user action
-  card.dataset.userAction = "none"; // "like", "dislike", or "none"
-
-  const likeBtn = card.querySelector(".like");
-  const dislikeBtn = card.querySelector(".dislike");
-  const likeCount = card.querySelector(".like-count");
-  const dislikeCount = card.querySelector(".dislike-count");
-
-  // Like button
-  likeBtn.addEventListener("click", () => {
-    if (card.dataset.userAction === "like") {
-      // Remove like
-      likeCount.textContent = parseInt(likeCount.textContent) - 1;
-      card.dataset.userAction = "none";
-    } else {
-      // Add like
-      likeCount.textContent = parseInt(likeCount.textContent) + 1;
-      // Remove dislike if previously disliked
-      if (card.dataset.userAction === "dislike") {
-        dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+    // Image Slider
+    function initializeImageSlider() {
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".dot");
+      
+      function showSlide(index) {
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        
+        document.querySelector(".slides").style.transform = `translateX(${-currentSlide * 100}%)`;
+        dots.forEach(dot => dot.classList.remove("active"));
+        dots[currentSlide].classList.add("active");
       }
-      card.dataset.userAction = "like";
+      
+      window.changeSlide = function(n) { showSlide(currentSlide + n); }
+      window.setSlide = function(n) { showSlide(n); }
+      
+      // Auto play every 5 seconds
+      setInterval(() => changeSlide(1), 5000);
     }
-  });
 
-  // Dislike button
-  dislikeBtn.addEventListener("click", () => {
-    if (card.dataset.userAction === "dislike") {
-      // Remove dislike
-      dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
-      card.dataset.userAction = "none";
-    } else {
-      // Add dislike
-      dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
-      // Remove like if previously liked
-      if (card.dataset.userAction === "like") {
-        likeCount.textContent = parseInt(likeCount.textContent) - 1;
-      }
-      card.dataset.userAction = "dislike";
+    // Image Cards
+    function initializeImageCards() {
+      document.querySelectorAll(".image-card").forEach(card => {
+        card.dataset.userAction = "none";
+        
+        const likeBtn = card.querySelector(".like");
+        const dislikeBtn = card.querySelector(".dislike");
+        const likeCount = card.querySelector(".like-count");
+        const dislikeCount = card.querySelector(".dislike-count");
+        
+        likeBtn.addEventListener("click", () => {
+          if (card.dataset.userAction === "like") {
+            likeCount.textContent = parseInt(likeCount.textContent) - 1;
+            card.dataset.userAction = "none";
+          } else {
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+            if (card.dataset.userAction === "dislike") {
+              dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+            }
+            card.dataset.userAction = "like";
+          }
+        });
+        
+        dislikeBtn.addEventListener("click", () => {
+          if (card.dataset.userAction === "dislike") {
+            dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+            card.dataset.userAction = "none";
+          } else {
+            dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+            if (card.dataset.userAction === "like") {
+              likeCount.textContent = parseInt(likeCount.textContent) - 1;
+            }
+            card.dataset.userAction = "dislike";
+          }
+        });
+        
+        card.querySelector(".share").addEventListener("click", () => {
+          const title = card.querySelector("strong").innerText;
+          const postUrl = window.location.href + "#" + title.replace(/\s+/g, "-").toLowerCase();
+          navigator.clipboard.writeText(postUrl).then(() => {
+            alert("🔗 Post link copied: " + postUrl);
+          });
+        });
+        
+        card.querySelector(".comment-btn").addEventListener("click", () => {
+          const input = card.querySelector(".comment-box input");
+          const text = input.value.trim();
+          if (text) {
+            const list = card.querySelector(".comment-list");
+            const div = document.createElement("div");
+            div.className = "comment";
+            div.textContent = text;
+            list.appendChild(div);
+            input.value = "";
+          }
+        });
+      });
     }
-  });
 
-  // Share
-  card.querySelector(".share").addEventListener("click", () => {
-    const title = card.querySelector("strong").innerText;
-    const postUrl = window.location.href + "#" + title.replace(/\s+/g, "-").toLowerCase();
-    navigator.clipboard.writeText(postUrl).then(() => {
-      alert("🔗 Post link copied: " + postUrl);
-    });
-  });
-
-  // Comment
-  card.querySelector(".comment-btn").addEventListener("click", () => {
-    const input = card.querySelector(".comment-box input");
-    const text = input.value.trim();
-    if (text !== "") {
-      const list = card.querySelector(".comment-list");
-      const div = document.createElement("div");
-      div.className = "comment";
-      div.textContent = text;
-      list.appendChild(div);
-      input.value = "";
+    // Back to Top Button
+    function initializeBackToTop() {
+      const backBtn = document.querySelector(".back-btn");
+      if (!backBtn) return;
+      
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 100) {
+          backBtn.classList.add("active");
+        } else {
+          backBtn.classList.remove("active");
+        }
+      });
+      
+      backBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
     }
-  });
-});
 
+    // Password Toggle
     function togglePassword() {
       const passwordField = document.getElementById('password');
       const eyeIcon = document.getElementById('eyeIcon');
-
+      
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
         eyeIcon.innerHTML = '<path d="M12 5c-5 0-9.27 3.11-11 7 1.73 3.89 6 7 11 7 2.4 0 4.7-.81 6.53-2.2l1.25 1.25 1.41-1.41-16-16L2.1 3.51l3.89 3.89C3.95 8.7 2 10.21 1 12c1.73 3.89 6 7 11 7 2.68 0 5.1-.94 7.01-2.5l2.38 2.38 1.41-1.41L3.51 2.1 2.1 3.51 5.17 6.6C3.05 8.09 1.47 10.01 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-.47-1.99-2.05-3.91-4.17-5.4L21.9 3.5 20.5 2.1l-2.18 2.18C16.1 2.87 14.1 2 12 2c-.73 0-1.44.09-2.11.26L12 5z"/>';
@@ -469,45 +481,32 @@ document.querySelectorAll(".image-card").forEach(card => {
       }
     }
 
+    // Form Validation
     function validateForm() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       const errorMsg = document.getElementById('errorMsg');
-
+      
       if (!username || !password) {
         errorMsg.style.display = 'block';
         return false;
       }
-
+      
       errorMsg.style.display = 'none';
       return true;
     }
 
-var backBtn = document.querySelector(".back-btn");
-widow.addEventListener("scroll", function() {
-  if (this.pageYOffset > 100) { 
-    backBtn.classList.add("active");
-  } else {
-    backBtn.classList.remove("active");
-  }
-});
-backBtn.addEventListener("click", function() {
-  window.scrollTo({
-    top: 0,
-    behavior:'smooth'
-  })
-})
-
-function openMenu(e) {
-  var menuList = document.querySelector('.nav .list');
-  if (e.innerHTML == "Menu") {
-    menuList.style.display = "block";
-    e.innerHTML = "Close";
-  } else {
-    menuList.style.display = "none";
-    e.innerHTML = "Menu";
-  }
-}
-
-
-</script>
+    // Mobile Menu Toggle
+    function openMenu(e) {
+      const menuList = document.querySelector('.nav .list');
+      if (e.innerHTML === "Menu") {
+        menuList.style.display = "block";
+        e.innerHTML = "Close";
+      } else {
+        menuList.style.display = "none";
+        e.innerHTML = "Menu";
+      }
+    }
+  </script>
+</body>
+</html>
