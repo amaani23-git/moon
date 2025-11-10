@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Niique INVESTORS{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #23242a;
+}
+
+.box {
+  background: #1c1c1c;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.inputBox {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ffb056;
+  background: transparent;
+  color: #fff;
+  outline: none;
+  border-radius: 4px;
+}
+
+.inputBox span {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #ffb056;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.inputBox input:focus ~ span,
+.inputBox input:valid ~ span {
+  transform: translateY(-20px);
+  font-size: 0.8em;
+  background: #1c1c1c;
+  padding: 0 5px;
+}
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="box">
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+      <div class="w3-panel w3-red">
+        <p>Your username and password didn't match. Please try again.</p>
+      </div>
+    {% endif %}
+    
+    <h2>SIGNIN</h2>
+    
+    <div class="inputBox">
+      {{ form.username }}
+      <span>Username</span>
+      <i></i>
+    </div>
+    
+    <div class="inputBox">
+      {{ form.password }}
+      <span>Password</span>
+      <i></i>
+    </div>
+    
+    <div class="links">
+      <a href="{% url 'password_reset' %}">Forgot password?</a>
+      <a href="{% url 'register' %}">Signup</a>
+    </div>
+    
+    <input type="submit" value="Login" class="w3-button w3-block w3-green">
+  </form>
+</div>
+{% endblock content %}

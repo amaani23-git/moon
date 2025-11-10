@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Niique INVESTORS{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    color: #ffb056;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .form-container {
+    margin-top: 50%;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    width: 100%;
+    color: #ffb056;
+    max-width: 420px;
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .form-container::before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    transform-origin: bottom right;
+    background: linear-gradient(1deg, transparent, #ffb056);
+    animation: animate 6s linear infinite;
+  }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="form-container">
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+      <div class="w3-panel w3-red">
+        <p>Please correct the errors below.</p>
+      </div>
+    {% endif %}
+    
+    <h2>Create Account</h2>
+    
+    {{ form.as_p }}
+    
+    <button type="submit" class="w3-button w3-block w3-blue">Register</button>
+    
+    <div class="w3-padding-16 w3-center">
+      <p>Already have an account? <a href="{% url 'login' %}" class="w3-text-blue">Login</a></p>
+    </div>
+  </form>
+</div>
+{% endblock content %}

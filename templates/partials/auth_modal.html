@@ -1,0 +1,40 @@
+<!-- Auth Modal -->
+<div id="authModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeAuthModal">&times;</span>
+    
+    <!-- Login Form -->
+    <form id="loginForm" class="auth-form active" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <h2>Login</h2>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+      <p class="switch-form">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="auth-form" method="post" action="{% url 'register' %}">
+      {% csrf_token %}
+      <h2>Register</h2>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password1" placeholder="Password" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+      </div>
+      <button type="submit" class="submit-btn">Register</button>
+      <p class="switch-form">Already have an account? <a href="#" id="showLogin">Login</a></p>
+    </form>
+  </div>
+</div>

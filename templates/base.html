@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Moon{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+
+    {% block extra_js %}{% endblock extra_js %}
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn --chdir backend backend.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/backend/staticfiles
+      - media_volume:/app/backend/mediafiles
+    expose:
+      - 8000
+    environment:
+      - DEBUG=0
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/app/backend/staticfiles
+      - media_volume:/app/backend/mediafiles
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
