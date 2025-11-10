@@ -1,0 +1,49 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+      - '.github/**'
+      - '!.github/workflows/deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    - name: Build and push Docker images
+      env:
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker-compose -f docker-compose.prod.yml build
+        docker tag moon-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/moon-web:$IMAGE_TAG
+        docker tag moon-web:latest ${{ secrets.DOCKERHUB_USERNAME }}/moon-web:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/moon-web:$IMAGE_TAG
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/moon-web:latest
+        
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /opt/moon
+          docker-compose -f docker-compose.prod.yml pull
+          docker-compose -f docker-compose.prod.yml up -d
+          docker image prune -f
