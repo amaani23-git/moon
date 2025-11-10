@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.env
+.venv/
+
+# Django
+/migrations/
+/__pycache__/
+db.sqlite3
+backend/db.sqlite3
+
+# Node/npm
+node_modules/
+
+# VSCode
+.vscode/
