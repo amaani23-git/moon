@@ -2,39 +2,50 @@
 
 A Django-based web application for Niique Investors, supporting community investment and development since 2014.
 
-## Setup
-
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   # or
-   venv\Scripts\activate  # Windows
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Run migrations:
-   ```bash
-   cd backend
-   python manage.py migrate
-   ```
-5. Start the development server:
-   ```bash
-   python manage.py runserver
-   ```
-
 ## Project Structure
 
-- `backend/` - Django project root
-  - `backend/` - Main Django app
-  - `core/` - Core application features
-  - `static/` - Static assets (CSS, JS, images)
-  - `templates/` - Django HTML templates
-- `images/` - Image assets
-- `requirements.txt` - Python dependencies
+```
+moon/
+├── backend/              # Django backend application
+│   ├── backend/         # Django project settings
+│   └── core/           # Main application module
+├── docs/               # Project documentation
+├── nginx/              # Nginx configuration for production
+├── scripts/            # Utility scripts
+├── static/             # Static files (CSS, JS, images)
+│   ├── css/           # Stylesheets
+│   ├── js/            # JavaScript files
+│   └── images/        # Image assets
+└── templates/          # Django templates
+    ├── core/          # Core app templates
+    ├── partials/      # Reusable template parts
+    └── registration/  # Auth-related templates
+```
+
+## Development Setup
+
+1. Create a `.env` file from `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Build and start the development containers:
+   ```bash
+   docker-compose up --build
+   ```
+
+## Production Deployment
+
+1. Set up your environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env with production values
+   ```
+
+2. Build and start the production containers:
+   ```bash
+   docker-compose -f docker-compose.prod.yml up --build
+   ```
 
 ## Contributing
 

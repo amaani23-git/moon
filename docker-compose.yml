@@ -13,6 +13,18 @@ services:
       - DJANGO_SECRET_KEY=dev-secret-key-change-in-production
     depends_on:
       - db
+  
+  test:
+    build: .
+    command: pytest
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+      - DJANGO_SECRET_KEY=test-key
+      - DATABASE_URL=postgres://moon_user:moon_password@db:5432/moon_test_db
+    depends_on:
+      - db
 
   db:
     image: postgres:13

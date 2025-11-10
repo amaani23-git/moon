@@ -8,6 +8,10 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 
+# Copy entrypoint script
+COPY scripts/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
