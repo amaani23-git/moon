@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Niique Investors — Home{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+{% endblock extra_css %}
+
+{% block hero %}
+<section class="home home-section hero" aria-label="Hero">
+  <div>
+    <h1>Partnering to build sustainable opportunities</h1>
+    <p class="lead">Niique Investors connects communities, investors, and projects to create lasting economic impact across real estate, agriculture, and social programs.</p>
+    <p><a class="btn primary" href="{% url 'core:register' %}">Get Started</a> <a class="btn" href="#services">Our Services</a></p>
+  </div>
+</section>
+{% endblock hero %}
+
+{% block content %}
+
+<section id="about" class="content-section">
+  <div class="site-container">
+    <h2>About Niique Investors</h2>
+    <p>Founded in 2014 by Collins Niique, we focus on projects that deliver social and financial returns. Our work includes market development, commercial property, agricultural initiatives, and community programs that uplift local economies.</p>
+  </div>
+</section>
+
+<section id="services" class="content-section">
+  <div class="site-container">
+    <h2>What We Do</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <h3>Investment Management</h3>
+        <p>Strategic guidance and portfolio stewardship tailored to impact-driven investors.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-building"></i></div>
+        <h3>Real Estate Development</h3>
+        <p>Development and management of commercial properties that create jobs and services.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-people"></i></div>
+        <h3>Community Programs</h3>
+        <p>Education, infrastructure and economic programs designed with local partners.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-tree-fill"></i></div>
+        <h3>Agricultural Support</h3>
+        <p>Helping farmers adopt modern techniques and access broader markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="content-section">
+  <div class="site-container">
+    <h2>Selected Projects</h2>
+    <div class="image-gallery">
+      <div class="image-card">
+        <img src="{% static 'images/agricultural.jpg' %}" alt="Agricultural project">
+        <strong>Modern Farming Initiative</strong>
+      </div>
+      <div class="image-card">
+        <img src="{% static 'images/women-shopping-fruit-market.jpg' %}" alt="Market project">
+        <strong>Market Revitalization</strong>
+      </div>
+      <div class="image-card">
+        <img src="{% static 'images/bangkok-thailand-august-12-2016-beautiful-luxury-living-room.jpg' %}" alt="Hospitality project">
+        <strong>Hospitality & Tourism</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="content-section">
+  <div class="site-container">
+    <h2>Testimonials</h2>
+    <div class="testimonials-grid">
+      <blockquote>
+        "Niique Investors helped our cooperative access new markets and scale production." — Community Leader
+      </blockquote>
+      <blockquote>
+        "Professional, transparent, and always focused on long-term impact." — Partner Investor
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="content-section">
+  <div class="site-container">
+    <h2>Contact & Support</h2>
+    <div class="contact-grid">
+      <div>
+        <p>For partnership inquiries, media, or support, reach out to <strong>support@niique.example</strong> or call <strong>+256 7773 53085</strong>.</p>
+      </div>
+
+      <div>
+        <form method="POST" class="contact-form">
+          {% csrf_token %}
+          <div class="form-group"><input type="text" name="name" placeholder="Full name" required></div>
+          <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+          <div class="form-group"><textarea name="message" rows="4" placeholder="Message"></textarea></div>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeImageSlider === 'function') { initializeImageSlider(); }
+    if (typeof initializeAuth === 'function') { initializeAuth(); }
+  });
+</script>
+{% endblock extra_js %}

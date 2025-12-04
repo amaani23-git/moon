@@ -305,7 +305,7 @@ function showNotification(message, type = 'info') {
         {% endfor %}
       {% endif %}
 
-      <form method="post" class="profile-info">
+      <form method="post" class="profile-info" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="info-item">
@@ -336,6 +336,16 @@ function showNotification(message, type = 'info') {
         <div class="info-item">
           <label class="info-label" for="id_location">Location</label>
           {{ form.location }}
+        </div>
+
+        <div class="info-item">
+          <label class="info-label">Profile picture</label>
+          {% if user.profile.image %}
+            <div style="margin-bottom:12px;">
+              <img src="{{ user.profile.image.url }}" alt="profile" style="max-width:120px;border-radius:8px;" />
+            </div>
+          {% endif %}
+          {{ form.image }}
         </div>
 
         <div class="profile-actions">

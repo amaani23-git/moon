@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm, ProfileForm
@@ -16,7 +18,7 @@ def index(request):
     # Simple form handling for service requests and contact messages
     if request.method == 'POST':
         if 'service_request' in request.POST:
-            ServiceRequest.objects.create(
+            sr = ServiceRequest.objects.create(
                 service_id=request.POST.get('service_id') or None,
                 name=request.POST.get('name', '').strip(),
                 email=request.POST.get('email', '').strip(),
@@ -24,15 +26,39 @@ def index(request):
                 budget=request.POST.get('budget', '').strip(),
                 requirements=request.POST.get('requirements', '').strip(),
             )
+            # notify admins
+            try:
+                send_mail(
+                    subject=f"New service request from {sr.name}",
+                    message=f"Service: {sr.service}\nName: {sr.name}\nEmail: {sr.email}\nPhone: {sr.phone}\nBudget: {sr.budget}\nRequirements: {sr.requirements}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[a[1] for a in settings.ADMINS],
+                    fail_silently=True,
+                )
+            except Exception:
+                pass
+            messages.success(request, 'Service request submitted — we will contact you soon.')
             return redirect('core:index')
 
         if 'contact_message' in request.POST:
-            ContactMessage.objects.create(
+            cm = ContactMessage.objects.create(
                 name=request.POST.get('name', '').strip(),
                 email=request.POST.get('email', '').strip(),
                 subject=request.POST.get('subject', '').strip(),
                 message=request.POST.get('message', '').strip(),
             )
+            # send notification to admins
+            try:
+                send_mail(
+                    subject=f"Contact message: {cm.subject or 'No subject'}",
+                    message=f"From: {cm.name} <{cm.email}>\n\n{cm.message}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[a[1] for a in settings.ADMINS],
+                    fail_silently=True,
+                )
+            except Exception:
+                pass
+            messages.success(request, 'Your message was sent. Thank you!')
             return redirect('core:index')
 
     context = {
@@ -64,7 +90,7 @@ def profile(request):
     profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
 

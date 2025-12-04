@@ -11,7 +11,10 @@ from .models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone', 'location')
+        fields = ('phone', 'location', 'image')
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'accept': 'image/*'})
+        }
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={

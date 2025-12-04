@@ -84,4 +84,13 @@
     <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/advanced.js' %}"></script>
 </body>
+        {% if messages %}
+        <div style="position:fixed;top:16px;right:16px;z-index:1200">
+            {% for message in messages %}
+                <div style="background:#333;color:white;padding:12px 16px;border-radius:8px;margin-bottom:8px;box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 </html>
