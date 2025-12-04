@@ -31,8 +31,54 @@
     </style>
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <header class="navigation-bar">
+        <div class="site-container nav-inner">
+            <a class="brand" href="{% url 'core:index' %}">Niique <span class="brand-accent">Investors</span></a>
+            <nav class="nav-links">
+                <a class="nav-link" href="{% url 'core:index' %}">Home</a>
+                <a class="nav-link" href="{% url 'core:profile' %}">Profile</a>
+                <a class="nav-link" href="{% url 'core:register' %}">Register</a>
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-container">
+        {% block hero %}
+        <section class="home home-section hero">
+            <div>
+                <h1>Building community. Creating opportunities.</h1>
+                <p class="lead">Join Niique Investors to discover projects, invest with confidence, and grow together.</p>
+                <p><a class="btn primary" href="{% url 'core:register' %}">Get Started</a></p>
+            </div>
+        </section>
+        {% endblock hero %}
+
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-container footer-inner">
+            <div class="footer-col">
+                <h4>Niique Investors</h4>
+                <p>Connecting investors and entrepreneurs to build sustainable projects.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Explore</h5>
+                <ul>
+                    <li><a href="{% url 'core:index' %}">Home</a></li>
+                    <li><a href="{% url 'core:register' %}">Register</a></li>
+                    <li><a href="{% url 'core:profile' %}">Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <p>support@niique.example</p>
+            </div>
+        </div>
+        <div class="site-container copyright">© {{ now|date:'Y' }} Niique Investors</div>
+    </footer>
 
     {% block extra_js %}{% endblock extra_js %}
     <script src="{% static 'js/index.js' %}"></script>
