@@ -802,3 +802,87 @@ html {
     color: #ccc;
   }
 }
+
+/* ============================================
+   PASSWORD STRENGTH METER
+   Enhanced visual feedback for auth forms
+   ============================================ */
+.password-strength {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #54606a;
+}
+
+.strength-meter {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.strength-meter .meter-section {
+  flex: 1 1 0;
+  height: 8px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  transition: background 280ms ease, transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.04);
+}
+
+.strength-meter .meter-section.active { transform: scaleY(1.05); }
+.strength-meter .meter-section.weak { background: linear-gradient(90deg,#ff9b9b,#ff6b6b); }
+.strength-meter .meter-section.medium { background: linear-gradient(90deg,#ffd08a,#ffb86b); }
+.strength-meter .meter-section.strong { background: linear-gradient(90deg,#84e0a8,#3bd76f); }
+.strength-meter .meter-section.very-strong { background: linear-gradient(90deg,#38d6a6,#0fb17d); }
+
+.strength-label {
+  min-width: 92px;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #2b3440;
+  margin-left: 12px;
+}
+
+.strength-requirements {
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.strength-requirements li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #7a8590;
+  font-size: 0.88rem;
+}
+
+.strength-requirements li::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.08);
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.05);
+}
+
+.strength-requirements li.met {
+  color: #086f3b;
+}
+
+.strength-requirements li.met::before {
+  background: linear-gradient(90deg,#7de0ad,#3bd76f);
+  box-shadow: 0 4px 12px rgba(59, 215, 111, 0.18);
+  transform: scale(1.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  .password-strength { color: #cbd5dd; }
+  .strength-label { color: #dbe8ef; }
+  .strength-requirements li { color: #98a3ad; }
+}
+
