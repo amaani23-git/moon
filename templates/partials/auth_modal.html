@@ -18,7 +18,7 @@
     </form>
 
     <!-- Register Form -->
-    <form id="registerForm" class="auth-form" method="post" action="{% url 'register' %}">
+    <form id="registerForm" class="auth-form" method="post" action="{% url 'core:register' %}">
       {% csrf_token %}
       <h2>Register</h2>
       <div class="form-group">
