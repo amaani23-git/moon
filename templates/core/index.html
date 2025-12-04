@@ -38,4 +38,515 @@
 
   {% include 'partials/auth_modal.html' %}
 </header>
+
+<!-- Hero Section -->
+<div class="home">
+  <section id="home" class="content-section active">
+    <div class="home-section">
+      <h1>Niique Investors</h1>
+      <p>Welcome to the trusted Niique Investors. We are glad that you're now part of the team.</p>
+      <span>Read more <a href="#about">about our company</a>. </span><br>
+      <span>You can also reach us or <a href="#contact">contact us</a> for further understanding about our company!</span>
+    </div>
+
+    <!-- Image Slider Section -->
+    <section class="slider">
+      <div class="slides">
+        <div class="slide active">
+          <img src="{% static 'images/agricultural.jpg' %}" alt="Factory">
+          <div class="caption">Our Modern Factory</div>
+        </div>
+        <div class="slide">
+          <img src="{% static 'images/women-shopping-fruit-market.jpg' %}" alt="Market">
+          <div class="caption">Central Market Growth</div>
+        </div>
+        <div class="slide">
+          <img src="{% static 'images/bangkok-thailand-august-12-2016-beautiful-luxury-living-room.jpg' %}" alt="Motel">
+          <div class="caption">Luxury Motel Investment</div>
+        </div>
+        <div class="slide">
+          <img src="{% static 'images/boy-rising-hand-class.jpg' %}" alt="School">
+          <div class="caption">Supporting Education</div>
+        </div>
+      </div>
+      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+      <a class="next" onclick="changeSlide(1)">&#10095;</a>
+      <div class="dots">
+        <span class="dot active" onclick="setSlide(0)"></span>
+        <span class="dot" onclick="setSlide(1)"></span>
+        <span class="dot" onclick="setSlide(2)"></span>
+        <span class="dot" onclick="setSlide(3)"></span>
+      </div>
+    </section>
+  </section>
+
+  <!-- About Section -->
+  <section class="content-section" id="about">
+    <h1>About Us</h1>
+    <p>Niique Company was established in 2014 by <strong class="founder-name">Collins Niique</strong>. His dream was to support the needy and work with everyone in society.</p>
+    <p>He became an entrepreneur and started building commercial centers such as markets, factories, and motels.</p>
+    
+    <div class="partners">
+      <h2>Meet some of our partners</h2>
+      <div class="partners-1">
+        <img src="{% static 'images/col.jpg' %}" alt="Collins Niique - Company Founder">
+        <p><strong class="partner-name">COLLINS NIIQUE</strong> a Ugandan citizen, He studied at <abbr title="Metropolitan International University">Metropolitan International University</abbr> where he took chance to get exposed to the entire community through team work</p>
+      </div>
+    </div><br><br>
+
+    <!-- Projects Gallery -->
+    <div class="projects">
+      <div class="image-gallery">
+        <div class="image-card">
+          <img src="{% static 'images/agricultural.jpg' %}" alt="Factory">
+          <strong>Factory</strong>
+          <div class="actions">
+            <button class="like">👍 Like <span class="like-count">0</span></button>
+            <button class="dislike">👎 Dislike <span class="dislike-count">0</span></button>
+            <button class="share">🔗 Share</button>
+          </div>
+          <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button class="comment-btn">💬</button>
+          </div>
+          <div class="comment-list"></div>
+        </div>
+
+        <div class="image-card">
+          <img src="{% static 'images/women-shopping-fruit-market.jpg' %}" alt="Market">
+          <strong>Central Market</strong>
+          <div class="actions">
+            <button class="like">👍 Like <span class="like-count">0</span></button>
+            <button class="dislike">👎 Dislike <span class="dislike-count">0</span></button>
+            <button class="share">🔗 Share</button>
+          </div>
+          <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button class="comment-btn">💬</button>
+          </div>
+          <div class="comment-list"></div>
+        </div>
+
+        <div class="image-card">
+          <img src="{% static 'images/bangkok-thailand-august-12-2016-beautiful-luxury-living-room.jpg' %}" alt="Motel">
+          <strong>Motel</strong>
+          <div class="actions">
+            <button class="like">👍 Like <span class="like-count">0</span></button>
+            <button class="dislike">👎 Dislike <span class="dislike-count">0</span></button>
+            <button class="share">🔗 Share</button>
+          </div>
+          <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button class="comment-btn">💬</button>
+          </div>
+          <div class="comment-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <p>For 10 years, Niique Investors has supported the needy and the community. We thank everyone who has been with us and welcome all new partners.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="content-section">
+    <h2>Our Services</h2>
+    <p class="section-description">We provide comprehensive investment and community support services</p>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="bi bi-graph-up-arrow"></i>
+        </div>
+        <h3>Investment Management</h3>
+        <p>Expert financial guidance and portfolio management to help you grow your wealth sustainably.</p>
+        <ul class="service-features">
+          <li><i class="bi bi-check-circle"></i> Portfolio Optimization</li>
+          <li><i class="bi bi-check-circle"></i> Risk Management</li>
+          <li><i class="bi bi-check-circle"></i> Market Analysis</li>
+        </ul>
+        <button class="service-cta">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="bi bi-building"></i>
+        </div>
+        <h3>Real Estate Development</h3>
+        <p>Development of commercial properties including markets, factories, and luxury motels.</p>
+        <ul class="service-features">
+          <li><i class="bi bi-check-circle"></i> Property Development</li>
+          <li><i class="bi bi-check-circle"></i> Commercial Leasing</li>
+          <li><i class="bi bi-check-circle"></i> Facility Management</li>
+        </ul>
+        <button class="service-cta">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="bi bi-people"></i>
+        </div>
+        <h3>Community Development</h3>
+        <p>Supporting local communities through education, infrastructure, and economic empowerment.</p>
+        <ul class="service-features">
+          <li><i class="bi bi-check-circle"></i> Education Support</li>
+          <li><i class="bi bi-check-circle"></i> Infrastructure Projects</li>
+          <li><i class="bi bi-check-circle"></i> Economic Programs</li>
+        </ul>
+        <button class="service-cta">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="bi bi-flower1"></i>
+        </div>
+        <h3>Agricultural Development</h3>
+        <p>Supporting farmers and agricultural initiatives to enhance food security and economic growth.</p>
+        <ul class="service-features">
+          <li><i class="bi bi-check-circle"></i> Modern Farming</li>
+          <li><i class="bi bi-check-circle"></i> Equipment Support</li>
+          <li><i class="bi bi-check-circle"></i> Market Access</li>
+        </ul>
+        <button class="service-cta">Learn More</button>
+      </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="statistics-section">
+      <div class="stat-card">
+        <i class="bi bi-people-fill"></i>
+        <div class="stat-number" data-target="5000">0</div>
+        <p>Community Members Supported</p>
+      </div>
+      
+      <div class="stat-card">
+        <i class="bi bi-building-fill"></i>
+        <div class="stat-number" data-target="50">0</div>
+        <p>Projects Completed</p>
+      </div>
+      
+      <div class="stat-card">
+        <i class="bi bi-graph-up"></i>
+        <div class="stat-number" data-target="95">0</div>
+        <p>Success Rate</p>
+      </div>
+      
+      <div class="stat-card">
+        <i class="bi bi-calendar-check"></i>
+        <div class="stat-number" data-target="10">0</div>
+        <p>Years of Experience</p>
+      </div>
+    </div>
+
+    <!-- Service Request Form -->
+    <div class="service-form-container">
+      <h3>Request a Service</h3>
+      <form id="serviceRequestForm" class="service-form" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label for="serviceType">Service Type</label>
+            <select id="serviceType" name="service_type" required>
+              <option value="">Select a Service</option>
+              <option value="investment">Investment Management</option>
+              <option value="realestate">Real Estate Development</option>
+              <option value="community">Community Development</option>
+              <option value="agriculture">Agricultural Support</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget" required>
+              <option value="">Select Budget Range</option>
+              <option value="small">$1,000 - $10,000</option>
+              <option value="medium">$10,000 - $50,000</option>
+              <option value="large">$50,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="timeline">Expected Timeline</label>
+            <input type="date" id="timeline" name="timeline" required>
+          </div>
+          <div class="form-group">
+            <label for="priority">Priority Level</label>
+            <select id="priority" name="priority" required>
+              <option value="">Select Priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="requirements">Special Requirements</label>
+          <textarea id="requirements" name="requirements" rows="4" placeholder="Describe your specific needs..."></textarea>
+        </div>
+        <button type="submit" class="submit-service-request">Submit Request</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="content-section">
+    <h2>Contact Us</h2>
+    <p>We'd like to hear from you. Get in touch with us to discuss how we can help you or how you can support us in any of the fields you wish</p>
+
+    <div class="contact-form">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="subject" name="subject" placeholder="Enter the subject" required>
+        </div>
+
+        <div class="form-group">
+          <textarea id="message" name="message" placeholder="Enter your message"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <div class="office-info">
+      <h3>Our office</h3>
+      <p><strong>Address:</strong> 1444 Business Avenue, Suite 500, Kanungu, K 10033</p>
+      <p><strong>Phone:</strong> (256)740-903224</p>
+      <p><strong>Email:</strong> niiqueinvestors@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-section-links">
+      <div class="audition">
+        <details>
+          <summary>What to consider!!!</summary>
+          <p>Being a computer scientist is one of the best things you should consider in this generation.</p>
+        </details>
+        <details>
+          <summary>What do you think about?</summary>
+          <p>Becoming one of the best developers that ever existed!!</p>
+        </details>
+      </div>
+
+      <div class="quink-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icon">
+          <a href="#"><img src="{% static 'images/facebook.svg' %}" alt="Facebook"></a>
+          <a href="#"><img src="{% static 'images/x.svg' %}" alt="Twitter"></a>
+          <a href="#"><img src="{% static 'images/github.svg' %}" alt="GitHub"></a>
+          <a href="#"><img src="{% static 'images/tiktok.svg' %}" alt="Tiktok"></a>
+          <a href="#"><img src="{% static 'images/instagram.svg' %}" alt="Instagram"></a>
+          <a href="#"><img src="{% static 'images/whatsapp.svg' %}" alt="Whatsapp"></a>
+        </div>
+        <div class="footer-section-contact">
+          <h4>Contact</h4>
+          <p>Email: taakhacollins@gmail.com</p>
+          <p>Phone: +256 7773 53085</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscribe -->
+    <form class="subscribe">
+      <h3>Subscribe Now</h3>
+      <p>Subscribe to our page for updates</p>
+      <div class="input">
+        <input type="email" placeholder="Email address" required>
+        <button type="submit">Subscribe</button>
+      </div>
+    </form>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 NIIQUE INVESTORS COMPANY LTD. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeNavigation();
+    initializeImageSlider();
+    initializeImageCards();
+    initializeAuth();
+  });
+
+  function initializeNavigation() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    menuToggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+      navList.classList.toggle('show');
+      this.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav') && navList.classList.contains('show')) {
+        navList.classList.remove('show');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
+      }
+    });
+    
+    function showSection(sectionId) {
+      contentSections.forEach(section => section.classList.remove('active'));
+      const section = document.getElementById(sectionId);
+      if (section) section.classList.add('active');
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-target') === sectionId) {
+          link.classList.add('active');
+        }
+      });
+
+      if (window.innerWidth < 768) {
+        navList.classList.remove('show');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
+      }
+    }
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetSection = this.getAttribute('data-target');
+        showSection(targetSection);
+      });
+    });
+    
+    showSection('home');
+  }
+
+  function initializeImageSlider() {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+    
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+      
+      document.querySelector(".slides").style.transform = `translateX(${-currentSlide * 100}%)`;
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[currentSlide].classList.add("active");
+    }
+    
+    window.changeSlide = function(n) { showSlide(currentSlide + n); }
+    window.setSlide = function(n) { showSlide(n); }
+    
+    setInterval(() => changeSlide(1), 5000);
+  }
+
+  function initializeImageCards() {
+    document.querySelectorAll(".image-card").forEach(card => {
+      card.dataset.userAction = "none";
+      
+      const likeBtn = card.querySelector(".like");
+      const dislikeBtn = card.querySelector(".dislike");
+      const likeCount = card.querySelector(".like-count");
+      const dislikeCount = card.querySelector(".dislike-count");
+      
+      if (likeBtn) {
+        likeBtn.addEventListener("click", () => {
+          if (card.dataset.userAction === "like") {
+            likeCount.textContent = parseInt(likeCount.textContent) - 1;
+            card.dataset.userAction = "none";
+          } else {
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+            if (card.dataset.userAction === "dislike") {
+              dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+            }
+            card.dataset.userAction = "like";
+          }
+        });
+      }
+      
+      if (dislikeBtn) {
+        dislikeBtn.addEventListener("click", () => {
+          if (card.dataset.userAction === "dislike") {
+            dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+            card.dataset.userAction = "none";
+          } else {
+            dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+            if (card.dataset.userAction === "like") {
+              likeCount.textContent = parseInt(likeCount.textContent) - 1;
+            }
+            card.dataset.userAction = "dislike";
+          }
+        });
+      }
+      
+      const shareBtn = card.querySelector(".share");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", () => {
+          const title = card.querySelector("strong").innerText;
+          const postUrl = window.location.href + "#" + title.replace(/\s+/g, "-").toLowerCase();
+          navigator.clipboard.writeText(postUrl).then(() => {
+            alert("🔗 Post link copied: " + postUrl);
+          });
+        });
+      }
+      
+      const commentBtn = card.querySelector(".comment-btn");
+      if (commentBtn) {
+        commentBtn.addEventListener("click", () => {
+          const input = card.querySelector(".comment-box input");
+          const text = input.value.trim();
+          if (text) {
+            const list = card.querySelector(".comment-list");
+            const div = document.createElement("div");
+            div.className = "comment";
+            div.textContent = text;
+            list.appendChild(div);
+            input.value = "";
+          }
+        });
+      }
+    });
+  }
+
+  function initializeAuth() {
+    const loginButton = document.getElementById('loginButton');
+    const registerButton = document.getElementById('registerButton');
+    
+    if (loginButton) {
+      loginButton.addEventListener('click', function() {
+        window.location.href = '{% url "login" %}';
+      });
+    }
+    
+    if (registerButton) {
+      registerButton.addEventListener('click', function() {
+        window.location.href = '{% url "core:register" %}';
+      });
+    }
+  }
+</script>
+{% endblock extra_js %}

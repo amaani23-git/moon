@@ -6,35 +6,512 @@
     <!-- Login Form -->
     <form id="loginForm" class="auth-form active" method="post" action="{% url 'login' %}">
       {% csrf_token %}
-      <h2>Login</h2>
-      <div class="form-group">
-        <input type="email" name="email" placeholder="Email" required>
+      <div class="form-header">
+        <div class="logo-animation">
+          <i class="bi bi-person-circle" style="font-size: 3rem; color: #4CAF50;"></i>
+        </div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to continue to your account</p>
       </div>
-      <div class="form-group">
-        <input type="password" name="password" placeholder="Password" required>
+      
+      <div class="divider">
+        <span>Sign In</span>
       </div>
-      <button type="submit" class="submit-btn">Login</button>
-      <p class="switch-form">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+      
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="bi bi-envelope"></i>
+          <input type="email" name="email" placeholder=" " required>
+          <label>Email Address</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="bi bi-lock"></i>
+          <input type="password" name="password" placeholder=" " required>
+          <label>Password</label>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="error-message" id="loginError">
+        <i class="bi bi-exclamation-circle"></i>
+        <span></span>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox-container">
+          <input type="checkbox" name="remember_me">
+          <span class="checkmark"></span>
+          <span class="label-text">Remember me</span>
+        </label>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="auth-submit">
+        <span>Log In</span>
+        <div class="loader"></div>
+      </button>
+
+      <div class="form-footer">
+        <p>Don't have an account?</p>
+        <button type="button" class="switch-form" data-target="register">Create Account</button>
+      </div>
     </form>
 
     <!-- Register Form -->
     <form id="registerForm" class="auth-form" method="post" action="{% url 'core:register' %}">
       {% csrf_token %}
-      <h2>Register</h2>
-      <div class="form-group">
-        <input type="text" name="username" placeholder="Username" required>
+      <div class="form-header">
+        <div class="logo-animation">
+          <i class="bi bi-person-plus-fill" style="font-size: 3rem; color: #2196F3;"></i>
+        </div>
+        <h2>Create Account</h2>
+        <p class="subtitle">Join our community today</p>
       </div>
-      <div class="form-group">
-        <input type="email" name="email" placeholder="Email" required>
+
+      <div class="form-progress">
+        <div class="progress-step active" data-step="1">
+          <div class="step-number">1</div>
+          <span>Account</span>
+        </div>
+        <div class="progress-step" data-step="2">
+          <div class="step-number">2</div>
+          <span>Profile</span>
+        </div>
+        <div class="progress-step" data-step="3">
+          <div class="step-number">3</div>
+          <span>Verify</span>
+        </div>
       </div>
-      <div class="form-group">
-        <input type="password" name="password1" placeholder="Password" required>
+
+      <!-- Step 1: Account Information -->
+      <div class="form-step active" data-step="1">
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-envelope"></i>
+            <input type="email" name="email" placeholder=" " required>
+            <label>Email Address</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-lock"></i>
+            <input type="password" name="password1" placeholder=" " required
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                   title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 characters">
+            <label>Password</label>
+            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="registerPasswordStrength">
+            <div class="strength-meter">
+              <div class="meter-section"></div>
+              <div class="meter-section"></div>
+              <div class="meter-section"></div>
+              <div class="meter-section"></div>
+            </div>
+            <ul class="strength-requirements">
+              <li data-requirement="length">At least 8 characters</li>
+              <li data-requirement="uppercase">One uppercase letter</li>
+              <li data-requirement="lowercase">One lowercase letter</li>
+              <li data-requirement="number">One number</li>
+              <li data-requirement="special">One special character</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-lock"></i>
+            <input type="password" name="password2" placeholder=" " required>
+            <label>Confirm Password</label>
+            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <input type="password" name="password2" placeholder="Confirm Password" required>
+
+      <!-- Step 2: Profile Information -->
+      <div class="form-step" data-step="2">
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-person"></i>
+            <input type="text" name="first_name" placeholder=" " required>
+            <label>First Name</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-person"></i>
+            <input type="text" name="last_name" placeholder=" " required>
+            <label>Last Name</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-phone"></i>
+            <input type="tel" name="phone" placeholder=" " required>
+            <label>Phone Number</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-icon">
+            <i class="bi bi-geo-alt"></i>
+            <input type="text" name="location" placeholder=" " required>
+            <label>Location</label>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="submit-btn">Register</button>
-      <p class="switch-form">Already have an account? <a href="#" id="showLogin">Login</a></p>
+
+      <!-- Step 3: Verification -->
+      <div class="form-step" data-step="3">
+        <div class="verification-section">
+          <div class="verification-info">
+            <i class="bi bi-envelope-check"></i>
+            <p>We've sent a verification code to your email</p>
+            <strong id="verificationEmail"></strong>
+          </div>
+
+          <div class="otp-input-group">
+            <input type="text" maxlength="1" class="otp-input" required>
+            <input type="text" maxlength="1" class="otp-input" required>
+            <input type="text" maxlength="1" class="otp-input" required>
+            <input type="text" maxlength="1" class="otp-input" required>
+            <input type="text" maxlength="1" class="otp-input" required>
+            <input type="text" maxlength="1" class="otp-input" required>
+          </div>
+
+          <div class="verification-actions">
+            <button type="button" id="resendCode" class="resend-code">
+              Resend Code
+              <span class="countdown"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="error-message" id="registerError">
+        <i class="bi bi-exclamation-circle"></i>
+        <span></span>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="prev-step">Back</button>
+        <button type="button" class="next-step">Next</button>
+        <button type="submit" class="auth-submit">
+          <span>Create Account</span>
+          <div class="loader"></div>
+        </button>
+      </div>
+
+      <div class="terms-privacy">
+        <label class="checkbox-container">
+          <input type="checkbox" name="agree_terms" required>
+          <span class="checkmark"></span>
+          <span class="label-text">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+        </label>
+      </div>
+
+      <div class="form-footer">
+        <p>Already have an account?</p>
+        <button type="button" class="switch-form" data-target="login">Log In</button>
+      </div>
     </form>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const authModal = document.getElementById('authModal');
+  const closeAuthModal = document.getElementById('closeAuthModal');
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const switchForms = document.querySelectorAll('.switch-form');
+  const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
+  function hideModal() {
+    const modalContent = authModal.querySelector('.modal-content');
+    modalContent.classList.remove('show');
+    setTimeout(() => {
+      authModal.classList.remove('show');
+      document.body.style.overflow = '';
+      resetForms();
+    }, 300);
+  }
+
+  function resetForms() {
+    loginForm.reset();
+    registerForm.reset();
+    document.querySelectorAll('.error-message span').forEach(el => el.textContent = '');
+    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+    document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
+    document.querySelector('.form-step[data-step="1"]').classList.add('active');
+    document.querySelector('.progress-step[data-step="1"]').classList.add('active');
+    
+    document.querySelectorAll('.password-strength').forEach(el => {
+      el.querySelectorAll('.meter-section').forEach(section => section.className = 'meter-section');
+      el.querySelectorAll('.strength-requirements li').forEach(req => req.classList.remove('met'));
+    });
+
+    document.querySelector('.prev-step').style.display = 'none';
+    document.querySelector('.next-step').style.display = 'block';
+    document.querySelector('.auth-submit').style.display = 'none';
+  }
+
+  function switchForm(target) {
+    const currentForm = target === 'register' ? loginForm : registerForm;
+    const newForm = target === 'register' ? registerForm : loginForm;
+    
+    currentForm.classList.add('fade-out');
+    
+    setTimeout(() => {
+      currentForm.classList.remove('active', 'fade-out');
+      newForm.classList.add('active', 'fade-in');
+      resetForms();
+      
+      setTimeout(() => {
+        newForm.classList.remove('fade-in');
+      }, 300);
+    }, 300);
+  }
+
+  function checkPasswordStrength(password, strengthEl) {
+    const requirements = {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*]/.test(password)
+    };
+
+    const meterSections = strengthEl.querySelectorAll('.meter-section');
+    const requirementsList = strengthEl.querySelectorAll('.strength-requirements li');
+    let strength = 0;
+
+    Object.entries(requirements).forEach(([req, met], index) => {
+      const reqElement = requirementsList[index];
+      if (met) {
+        reqElement.classList.add('met');
+        strength++;
+      } else {
+        reqElement.classList.remove('met');
+      }
+    });
+
+    meterSections.forEach((section, index) => {
+      section.className = 'meter-section';
+      if (index < strength) {
+        section.classList.add(
+          strength <= 2 ? 'weak' :
+          strength <= 3 ? 'medium' :
+          strength <= 4 ? 'strong' : 'very-strong'
+        );
+      }
+    });
+
+    return strength;
+  }
+
+  const progressSteps = document.querySelectorAll('.progress-step');
+  const formSteps = document.querySelectorAll('.form-step');
+  const prevStepBtn = document.querySelector('.prev-step');
+  const nextStepBtn = document.querySelector('.next-step');
+  let currentStep = 1;
+
+  function updateFormStep(step) {
+    formSteps.forEach(s => s.classList.remove('active'));
+    progressSteps.forEach(s => s.classList.remove('active'));
+    
+    const newFormStep = document.querySelector(`.form-step[data-step="${step}"]`);
+    const newProgressStep = document.querySelector(`.progress-step[data-step="${step}"]`);
+    
+    if (newFormStep) newFormStep.classList.add('active');
+    if (newProgressStep) newProgressStep.classList.add('active');
+    
+    prevStepBtn.style.display = step === 1 ? 'none' : 'block';
+    nextStepBtn.style.display = step === 3 ? 'none' : 'block';
+    registerForm.querySelector('.auth-submit').style.display = step === 3 ? 'block' : 'none';
+
+    progressSteps.forEach(s => {
+      const stepNum = parseInt(s.dataset.step);
+      if (stepNum < step) {
+        s.classList.add('completed');
+      } else {
+        s.classList.remove('completed');
+      }
+    });
+  }
+
+  const otpInputs = document.querySelectorAll('.otp-input');
+  otpInputs.forEach((input, index) => {
+    input.addEventListener('keyup', (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        if (index < otpInputs.length - 1) {
+          otpInputs[index + 1].focus();
+        }
+      } else if (e.key === 'Backspace') {
+        if (index > 0) {
+          otpInputs[index - 1].focus();
+        }
+      }
+    });
+  });
+
+  const resendButton = document.getElementById('resendCode');
+  function startResendTimer() {
+    let timeLeft = 30;
+    resendButton.disabled = true;
+    
+    const countdown = resendButton.querySelector('.countdown');
+    countdown.textContent = `(${timeLeft}s)`;
+    
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdown.textContent = `(${timeLeft}s)`;
+      
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        resendButton.disabled = false;
+        countdown.textContent = '';
+      }
+    }, 1000);
+  }
+
+  prevStepBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateFormStep(currentStep);
+    }
+  });
+
+  nextStepBtn.addEventListener('click', () => {
+    const isValid = validateStep(currentStep);
+    if (isValid && currentStep < 3) {
+      currentStep++;
+      updateFormStep(currentStep);
+      if (currentStep === 3) {
+        const email = registerForm.querySelector('input[name="email"]').value;
+        document.getElementById('verificationEmail').textContent = email;
+        startResendTimer();
+      }
+    }
+  });
+
+  resendButton.addEventListener('click', () => {
+    if (!resendButton.disabled) {
+      startResendTimer();
+    }
+  });
+
+  document.querySelectorAll('input[type="password"]').forEach(input => {
+    const strengthEl = input.closest('.form-group').querySelector('.password-strength');
+    if (strengthEl) {
+      input.addEventListener('input', () => {
+        checkPasswordStrength(input.value, strengthEl);
+      });
+    }
+  });
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validateStep(step) {
+    const errorEl = document.getElementById('registerError');
+    errorEl.querySelector('span').textContent = '';
+
+    switch (step) {
+      case 1:
+        const email = registerForm.querySelector('input[name="email"]').value;
+        const password = registerForm.querySelector('input[name="password1"]').value;
+        const confirmPass = registerForm.querySelector('input[name="password2"]').value;
+
+        if (!validateEmail(email)) {
+          errorEl.querySelector('span').textContent = 'Please enter a valid email address';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+
+        if (checkPasswordStrength(password, document.getElementById('registerPasswordStrength')) < 3) {
+          errorEl.querySelector('span').textContent = 'Please create a stronger password';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+
+        if (password !== confirmPass) {
+          errorEl.querySelector('span').textContent = 'Passwords do not match';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+        break;
+
+      case 2:
+        const firstName = registerForm.querySelector('input[name="first_name"]').value;
+        const lastName = registerForm.querySelector('input[name="last_name"]').value;
+        const phone = registerForm.querySelector('input[name="phone"]').value;
+        const location = registerForm.querySelector('input[name="location"]').value;
+
+        if (!firstName || !lastName) {
+          errorEl.querySelector('span').textContent = 'Please enter your full name';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+
+        if (!phone) {
+          errorEl.querySelector('span').textContent = 'Please enter your phone number';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+
+        if (!location) {
+          errorEl.querySelector('span').textContent = 'Please enter your location';
+          errorEl.style.display = 'flex';
+          return false;
+        }
+        break;
+    }
+
+    return true;
+  }
+
+  closeAuthModal.addEventListener('click', hideModal);
+
+  authModal.addEventListener('click', (e) => {
+    if (e.target === authModal) hideModal();
+  });
+
+  switchForms.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchForm(button.dataset.target);
+    });
+  });
+
+  togglePasswordButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const input = button.closest('.input-icon').querySelector('input');
+      const icon = button.querySelector('i');
+      
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+      }
+    });
+  });
+});
+</script>
