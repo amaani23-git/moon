@@ -94,6 +94,14 @@ STATIC_URL = '/static/'
 # `images/` and other assets remain available during development).
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# Directory where `collectstatic` will place static files for production
+# Keep it outside app static folders so it's easy to serve (e.g. via nginx)
+STATIC_ROOT = BASE_DIR.parent / 'staticfiles'
+
+# Media (user-uploaded) settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
 # After login, redirect users to the profile page in the `core` app.
