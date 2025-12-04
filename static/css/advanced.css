@@ -1,0 +1,804 @@
+/* ============================================
+   ADVANCED STYLING & INTERACTIVITY
+   ============================================ */
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* ============================================
+   PAGE TRANSITIONS & ANIMATIONS
+   ============================================ */
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-section {
+  animation: pageSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(var(--section-index, 0) * 0.1s);
+}
+
+/* ============================================
+   ENHANCED NAVIGATION
+   ============================================ */
+.navigation-bar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.nav-link {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #61dafb, #2575fc);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* ============================================
+   HOME SECTION ENHANCEMENTS
+   ============================================ */
+.home {
+  position: relative;
+  overflow: hidden;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(97, 218, 251, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(37, 117, 252, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-section {
+  position: relative;
+  z-index: 2;
+  animation: slideDown 0.8s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-section h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+  background: linear-gradient(135deg, #61dafb 0%, #2575fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 3s ease infinite;
+}
+
+@keyframes textShimmer {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ============================================
+   SLIDER ENHANCEMENTS
+   ============================================ */
+.slider {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.slide {
+  position: relative;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(97, 218, 251, 0.1) 0%, rgba(37, 117, 252, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slide:hover::after {
+  opacity: 1;
+}
+
+.slide img {
+  transition: transform 0.5s ease;
+}
+
+.slide.active img {
+  transform: scale(1.02) translateZ(0);
+}
+
+.prev, .next {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+  background: linear-gradient(135deg, rgba(97, 218, 251, 0.5) 0%, rgba(37, 117, 252, 0.8) 100%);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
+}
+
+.dot {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.dot.active {
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(97, 218, 251, 0.8);
+}
+
+/* ============================================
+   IMAGE GALLERY INTERACTIVITY
+   ============================================ */
+.image-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.image-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(97, 218, 251, 0) 0%, rgba(37, 117, 252, 0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.image-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(97, 218, 251, 0.3);
+}
+
+.image-card:hover::before {
+  opacity: 1;
+}
+
+.image-card img {
+  transition: transform 0.4s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.1);
+}
+
+.actions button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  transform: scale(0.95);
+}
+
+.actions button:hover {
+  transform: scale(1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.actions button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.actions button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.comment {
+  animation: slideInComment 0.3s ease;
+}
+
+@keyframes slideInComment {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   SERVICE CARDS ADVANCED EFFECTS
+   ============================================ */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(97, 218, 251, 0.1) 0%,
+    rgba(37, 117, 252, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover::after {
+  opacity: 1;
+}
+
+.service-icon {
+  position: relative;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.service-card:hover .service-icon {
+  animation: none;
+  transform: scale(1.2) rotateY(360deg);
+}
+
+.service-features li {
+  position: relative;
+  padding-left: 25px;
+  animation: fadeInUp 0.6s ease;
+  animation-fill-mode: both;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #61dafb, #2575fc);
+  border-radius: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-features li::before {
+  transform: translateY(-50%) scale(1);
+}
+
+/* ============================================
+   STATISTICS COUNTER ANIMATION
+   ============================================ */
+.statistics-section {
+  position: relative;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(97, 218, 251, 0.1), rgba(37, 117, 252, 0.1));
+  transition: top 0.5s ease;
+}
+
+.stat-card:hover::before {
+  top: 0;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: linear-gradient(135deg, #fff 0%, #e8f4f8 100%);
+}
+
+.stat-number {
+  position: relative;
+  font-family: 'Arial Black', sans-serif;
+  background: linear-gradient(135deg, #61dafb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: countPulse 0.6s ease;
+}
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================
+   SERVICE FORM ENHANCEMENTS
+   ============================================ */
+.service-form .form-group {
+  position: relative;
+  transform-origin: center;
+}
+
+.service-form input,
+.service-form select,
+.service-form textarea {
+  position: relative;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.service-form input::placeholder,
+.service-form textarea::placeholder {
+  color: transparent;
+}
+
+.service-form input:focus,
+.service-form select:focus,
+.service-form textarea:focus {
+  background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+  border-color: #61dafb;
+  box-shadow: 
+    0 0 0 3px rgba(97, 218, 251, 0.1),
+    0 0 15px rgba(97, 218, 251, 0.2),
+    inset 0 0 0 1px rgba(97, 218, 251, 0.1);
+  transform: scale(1.01);
+}
+
+.service-form label {
+  position: relative;
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.service-form label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #61dafb, #2575fc);
+  transition: left 0.3s ease;
+}
+
+.service-form input:focus ~ label::after,
+.service-form select:focus ~ label::after,
+.service-form textarea:focus ~ label::after {
+  left: 0;
+}
+
+.submit-service-request {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #61dafb, #2575fc);
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.submit-service-request:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 25px rgba(97, 218, 251, 0.3),
+    0 0 15px rgba(37, 117, 252, 0.2);
+}
+
+.submit-service-request:active {
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   CONTACT FORM INTERACTIVITY
+   ============================================ */
+.contact-form {
+  position: relative;
+  animation: fadeInUp 0.6s ease;
+}
+
+.contact-form .form-group {
+  position: relative;
+  margin-bottom: 25px;
+  animation: fadeInUp 0.6s ease;
+  animation-fill-mode: both;
+  animation-delay: calc(var(--form-index, 0) * 0.1s);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+  border: 2px solid #e0e0e0;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+  border-color: #61dafb;
+  box-shadow: 
+    0 0 0 3px rgba(97, 218, 251, 0.1),
+    inset 0 0 10px rgba(97, 218, 251, 0.1);
+  transform: scale(1.01);
+}
+
+/* ============================================
+   FOOTER ENHANCEMENTS
+   ============================================ */
+.footer {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #61dafb 50%,
+    transparent 100%
+  );
+}
+
+.footer-social img {
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.footer-social img:hover {
+  animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1) translateY(0); }
+  25% { transform: scale(1.1) translateY(-5px); }
+  50% { transform: scale(1.15) translateY(-10px); }
+  75% { transform: scale(1.1) translateY(-5px); }
+}
+
+.quink-links ul li a {
+  position: relative;
+}
+
+.quink-links ul li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #61dafb, #2575fc);
+  transition: width 0.3s ease;
+}
+
+.quink-links ul li a:hover::before {
+  width: 100%;
+}
+
+/* ============================================
+   MODAL & FORM ANIMATIONS
+   ============================================ */
+.auth-form.active {
+  animation: formSlideIn 0.5s ease;
+}
+
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.progress-step {
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  animation: stepBounce 0.6s ease;
+}
+
+@keyframes stepBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+@keyframes scrollReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card,
+.stat-card,
+.image-card {
+  animation: scrollReveal 0.6s ease-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+/* ============================================
+   PARTICLE EFFECTS
+   ============================================ */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #61dafb;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particleFloat 2s ease-out forwards;
+}
+
+@keyframes particleFloat {
+  from {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================
+   HOVER LIFT EFFECT
+   ============================================ */
+.service-card,
+.stat-card,
+.image-card,
+.footer-social img {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover,
+.stat-card:hover,
+.image-card:hover {
+  box-shadow: 0 20px 40px rgba(97, 218, 251, 0.2);
+}
+
+/* ============================================
+   TEXT ANIMATIONS
+   ============================================ */
+.service-card h3 {
+  position: relative;
+  background: linear-gradient(135deg, #333, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.service-card h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #61dafb, #2575fc);
+  transition: width 0.3s ease;
+}
+
+.service-card:hover h3::after {
+  width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE ENHANCEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+  .home-section h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .service-card {
+    margin-bottom: 20px;
+  }
+
+  .statistics-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-link {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider {
+    height: 200px;
+  }
+
+  .slide img {
+    height: 200px;
+  }
+
+  .statistics-section {
+    grid-template-columns: 1fr;
+  }
+
+  .image-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .service-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-service-request {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  .service-form input,
+  .service-form select,
+  .service-form textarea,
+  .contact-form input,
+  .contact-form textarea {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    color: #ccc;
+  }
+
+  .content-section {
+    background: #1a1a1a;
+    color: #ccc;
+  }
+
+  .service-card,
+  .stat-card,
+  .image-card {
+    background: #2d2d2d;
+    color: #ccc;
+  }
+}
