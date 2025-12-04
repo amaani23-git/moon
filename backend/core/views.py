@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .models import Service, Project, ServiceRequest, ContactMessage
 
 
@@ -34,3 +37,30 @@ def index(request):
         'projects': projects,
     }
     return render(request, 'core/index.html', context)
+
+
+def register(request):
+    """Handle user registration."""
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password1', '').strip()
+        password_confirm = request.POST.get('password2', '').strip()
+
+        if password != password_confirm:
+            return render(request, 'registration/register.html', {'error': 'Passwords do not match'})
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'registration/register.html', {'error': 'Username already taken'})
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        login(request, user)
+        return redirect('core:index')
+
+    return render(request, 'registration/register.html')
+
+
+@login_required(login_url='login')
+def profile(request):
+    """Display user profile."""
+    return render(request, 'registration/profile.html')
