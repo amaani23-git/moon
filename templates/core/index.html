@@ -1,90 +1,127 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}NIIQUE INVESTORS{% endblock title %}
+{% block title %}Niique Investors — Home{% endblock title %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 {% endblock extra_css %}
 
+{% block hero %}
+<section class="home home-section hero" aria-label="Hero">
+  <div>
+    <h1>Partnering to build sustainable opportunities</h1>
+    <p class="lead">Niique Investors connects communities, investors, and projects to create lasting economic impact across real estate, agriculture, and social programs.</p>
+    <p><a class="btn primary" href="{% url 'core:register' %}">Get Started</a> <a class="btn" href="#services">Our Services</a></p>
+  </div>
+</section>
+{% endblock hero %}
+
 {% block content %}
-<!-- Navigation -->
-<header class="navigation-bar">
-  <div class="logo">
-    <span>Niique INVESTORS</span>
+
+<section id="about" class="content-section">
+  <div class="site-container">
+    <h2>About Niique Investors</h2>
+    <p>Founded in 2014 by Collins Niique, we focus on projects that deliver social and financial returns. Our work includes market development, commercial property, agricultural initiatives, and community programs that uplift local economies.</p>
   </div>
-  <nav class="nav">
-    <div class="top">
-      <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="navList">
-        <span class="menu-icon"></span>
-        <span class="menu-text">Menu</span>
-      </button>
+</section>
+
+<section id="services" class="content-section">
+  <div class="site-container">
+    <h2>What We Do</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <h3>Investment Management</h3>
+        <p>Strategic guidance and portfolio stewardship tailored to impact-driven investors.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-building"></i></div>
+        <h3>Real Estate Development</h3>
+        <p>Development and management of commercial properties that create jobs and services.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-people"></i></div>
+        <h3>Community Programs</h3>
+        <p>Education, infrastructure and economic programs designed with local partners.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="bi bi-tree-fill"></i></div>
+        <h3>Agricultural Support</h3>
+        <p>Helping farmers adopt modern techniques and access broader markets.</p>
+      </div>
     </div>
-    <ul class="list" id="navList">
-      <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-target="about">About</a></li>
-      <li><a href="#services" class="nav-link" data-target="services">Services</a></li>
-      <li><a href="#projects" class="nav-link" data-target="projects">Projects</a></li>
-      <li><a href="#gallery" class="nav-link" data-target="gallery">Gallery</a></li>
-      <li><a href="#contact" class="nav-link" data-target="contact">Contact us</a></li>
-    </ul>
-  </nav>
-  <div class="auth-buttons">
-    <button id="loginButton" class="w3-button w3-green w3-large">Login</button>
-    <button id="registerButton" class="w3-button w3-blue w3-large">Register</button>
   </div>
+</section>
 
-  {% include 'partials/auth_modal.html' %}
-</header>
-
-<!-- Hero Section -->
-<div class="home">
-  <section id="home" class="content-section active">
-    <div class="home-section">
-      <h1>Niique Investors</h1>
-      <p>Welcome to the trusted Niique Investors. We are glad that you're now part of the team.</p>
-      <span>Read more <a href="#about">about our company</a>. </span><br>
-      <span>You can also reach us or <a href="#contact">contact us</a> for further understanding about our company!</span>
+<section id="projects" class="content-section">
+  <div class="site-container">
+    <h2>Selected Projects</h2>
+    <div class="image-gallery">
+      <div class="image-card">
+        <img src="{% static 'images/agricultural.jpg' %}" alt="Agricultural project">
+        <strong>Modern Farming Initiative</strong>
+      </div>
+      <div class="image-card">
+        <img src="{% static 'images/women-shopping-fruit-market.jpg' %}" alt="Market project">
+        <strong>Market Revitalization</strong>
+      </div>
+      <div class="image-card">
+        <img src="{% static 'images/bangkok-thailand-august-12-2016-beautiful-luxury-living-room.jpg' %}" alt="Hospitality project">
+        <strong>Hospitality & Tourism</strong>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Image Slider Section -->
-    <section class="slider">
-      <div class="slides">
-        <div class="slide active">
-          <img src="{% static 'images/agricultural.jpg' %}" alt="Factory">
-          <div class="caption">Our Modern Factory</div>
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/women-shopping-fruit-market.jpg' %}" alt="Market">
-          <div class="caption">Central Market Growth</div>
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/bangkok-thailand-august-12-2016-beautiful-luxury-living-room.jpg' %}" alt="Motel">
-          <div class="caption">Luxury Motel Investment</div>
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/boy-rising-hand-class.jpg' %}" alt="School">
-          <div class="caption">Supporting Education</div>
-        </div>
-      </div>
-      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-      <a class="next" onclick="changeSlide(1)">&#10095;</a>
-      <div class="dots">
-        <span class="dot active" onclick="setSlide(0)"></span>
-        <span class="dot" onclick="setSlide(1)"></span>
-        <span class="dot" onclick="setSlide(2)"></span>
-        <span class="dot" onclick="setSlide(3)"></span>
-      </div>
-    </section>
-  </section>
+<section id="testimonials" class="content-section">
+  <div class="site-container">
+    <h2>Testimonials</h2>
+    <div class="testimonials-grid">
+      <blockquote>
+        "Niique Investors helped our cooperative access new markets and scale production." — Community Leader
+      </blockquote>
+      <blockquote>
+        "Professional, transparent, and always focused on long-term impact." — Partner Investor
+      </blockquote>
+    </div>
+  </div>
+</section>
 
-  <!-- About Section -->
-  <section class="content-section" id="about">
-    <h1>About Us</h1>
-    <p>Niique Company was established in 2014 by <strong class="founder-name">Collins Niique</strong>. His dream was to support the needy and work with everyone in society.</p>
-    <p>He became an entrepreneur and started building commercial centers such as markets, factories, and motels.</p>
+<section id="contact" class="content-section">
+  <div class="site-container">
+    <h2>Contact & Support</h2>
+    <div class="contact-grid">
+      <div>
+        <p>For partnership inquiries, media, or support, reach out to <strong>support@niique.example</strong> or call <strong>+256 7773 53085</strong>.</p>
+      </div>
+
+      <div>
+        <form method="POST" class="contact-form">
+          {% csrf_token %}
+          <div class="form-group"><input type="text" name="name" placeholder="Full name" required></div>
+          <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+          <div class="form-group"><textarea name="message" rows="4" placeholder="Message"></textarea></div>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeImageSlider === 'function') { initializeImageSlider(); }
+    if (typeof initializeAuth === 'function') { initializeAuth(); }
+  });
+</script>
+{% endblock extra_js %}
     
     <div class="partners">
       <h2>Meet some of our partners</h2>
@@ -242,6 +279,7 @@
       <h3>Request a Service</h3>
       <form id="serviceRequestForm" class="service-form" method="POST">
         {% csrf_token %}
+        <input type="hidden" name="service_request" value="1">
         <div class="form-row">
           <div class="form-group">
             <label for="serviceType">Service Type</label>
@@ -295,6 +333,7 @@
     <div class="contact-form">
       <form method="POST">
         {% csrf_token %}
+        <input type="hidden" name="contact_message" value="1">
         <div class="form-group">
           <input type="text" id="name" name="name" placeholder="Enter your full name" required>
         </div>
