@@ -290,6 +290,10 @@ function showNotification(message, type = 'info') {
     {% if form.errors %}
       <div class="error-message">
         <i class="bi bi-exclamation-circle"></i> Invalid username or password. Please try again.
+        <div style="margin-top:8px; font-size:0.9em;">
+          <span style="color:#ccc;">Don't have an account?</span>
+          <a href="{% url 'core:register' %}" style="color:#61dafb; margin-left:6px;">Create one</a>
+        </div>
       </div>
     {% endif %}
     

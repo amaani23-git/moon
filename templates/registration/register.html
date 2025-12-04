@@ -300,6 +300,13 @@ function showNotification(message, type = 'info') {
           {% endfor %}
         {% endif %}
       </div>
+      {% if forloop.first %}
+        <!-- Insert an email field just after the username field -->
+        <div class="form-group">
+          <label for="id_email">Email (optional)</label>
+          <input type="email" name="email" id="id_email" placeholder="you@example.com" class="" />
+        </div>
+      {% endif %}
     {% endfor %}
     
     <button type="submit" class="submit-btn">

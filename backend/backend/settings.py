@@ -95,3 +95,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static', BASE_DIR.parent]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+ 
+# After login, redirect users to the profile page in the `core` app.
+LOGIN_REDIRECT_URL = '/profile/'
