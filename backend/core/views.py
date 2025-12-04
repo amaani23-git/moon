@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from .models import Service, Project, ServiceRequest, ContactMessage
 
 
@@ -41,23 +42,24 @@ def index(request):
 
 def register(request):
     """Handle user registration."""
+    # Use Django's UserCreationForm to handle validation and password hashing
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        email = request.POST.get('email', '').strip()
-        password = request.POST.get('password1', '').strip()
-        password_confirm = request.POST.get('password2', '').strip()
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            # Optional email field (not included in UserCreationForm by default)
+            email = request.POST.get('email', '').strip()
+            if email:
+                user.email = email
+            user.save()
+            login(request, user)
+            return redirect('core:index')
+        # if form invalid, fall through to re-render with errors
+        return render(request, 'registration/register.html', {'form': form})
 
-        if password != password_confirm:
-            return render(request, 'registration/register.html', {'error': 'Passwords do not match'})
-
-        if User.objects.filter(username=username).exists():
-            return render(request, 'registration/register.html', {'error': 'Username already taken'})
-
-        user = User.objects.create_user(username=username, email=email, password=password)
-        login(request, user)
-        return redirect('core:index')
-
-    return render(request, 'registration/register.html')
+    # GET - show blank form
+    form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
 
 
 @login_required(login_url='login')
