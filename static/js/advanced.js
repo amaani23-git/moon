@@ -8,7 +8,104 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeParticleEffects();
   initializeScrollAnimations();
   initializeFormEnhancements();
+  initializeAuthForms();
 });
+
+// ============================================
+// AUTH FORMS: password strength, toggle, validation
+// ============================================
+function initializeAuthForms() {
+  // Add form-control class to auth form inputs for consistent styling
+  ['#registerForm', '#loginForm', '.form-container .form-group form', '.login-container form'].forEach(sel => {
+    document.querySelectorAll(sel).forEach(form => {
+      form.querySelectorAll('input, textarea, select').forEach(input => {
+        if (!input.classList.contains('form-control')) input.classList.add('form-control');
+      });
+    });
+  });
+
+  // Register page strength meter (non-modal)
+  const regStrength = document.getElementById('registerPasswordStrength');
+  const regPassword = document.querySelector('input[name="password1"]');
+  if (regStrength && regPassword) {
+    regPassword.addEventListener('input', () => {
+      updatePasswordStrength(regPassword.value, regStrength);
+    });
+  }
+
+  // Toggle password visibility buttons
+  document.querySelectorAll('.toggle-password').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const input = btn.closest('.form-group').querySelector('input[type="password"], input');
+      if (!input) return;
+      const icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) { icon.classList.remove('bi-eye'); icon.classList.add('bi-eye-slash'); }
+      } else {
+        input.type = 'password';
+        if (icon) { icon.classList.remove('bi-eye-slash'); icon.classList.add('bi-eye'); }
+      }
+    });
+  });
+
+  // Add client-side validation for auth forms
+  const authForms = document.querySelectorAll('#registerForm, .form-container form, .login-container form');
+  authForms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+      // simple check: required inputs
+      const requiredInputs = form.querySelectorAll('input[required]');
+      let ok = true;
+      requiredInputs.forEach(inp => {
+        if (!inp.value.trim()) {
+          inp.classList.add('invalid');
+          ok = false;
+        }
+      });
+      if (!ok) {
+        e.preventDefault();
+        showNotification('error', 'Please fill all required fields correctly');
+      }
+    });
+  });
+}
+
+function updatePasswordStrength(password, strengthEl) {
+  const requirements = {
+    length: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /\d/.test(password),
+    special: /[!@#$%^&*]/.test(password)
+  };
+
+  const meterSections = strengthEl.querySelectorAll('.meter-section');
+  const requirementsList = strengthEl.querySelectorAll('.strength-requirements li');
+  let strength = 0;
+  Object.entries(requirements).forEach(([key, met], i) => {
+    const reqEl = requirementsList[i];
+    if (met) {
+      reqEl.classList.add('met');
+      strength++;
+    } else {
+      reqEl.classList.remove('met');
+    }
+  });
+
+  meterSections.forEach((sec, idx) => {
+    sec.className = 'meter-section';
+    if (idx < strength) {
+      sec.classList.add(
+        strength <= 2 ? 'weak' :
+        strength <= 3 ? 'medium' :
+        strength <= 4 ? 'strong' : 'very-strong'
+      );
+    }
+  });
+
+  return strength;
+}
 
 // ============================================
 // PARTICLE EFFECTS ON CLICK
