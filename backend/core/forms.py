@@ -4,6 +4,15 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
+from .models import Profile
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('phone', 'location')
+
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={
         'placeholder': 'you@example.com',

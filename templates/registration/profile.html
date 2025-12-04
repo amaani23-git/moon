@@ -295,51 +295,55 @@ function showNotification(message, type = 'info') {
   {% if user.is_authenticated %}
     <div class="profile-header">
       <h1><i class="bi bi-person-circle"></i> {{ user.first_name|default:user.username }}</h1>
-      <p>Welcome to your profile</p>
+      <p>Manage your account and personal details</p>
     </div>
-    
+
     <div class="profile-card">
-      <div class="profile-info">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="success-message">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post" class="profile-info">
+        {% csrf_token %}
+
         <div class="info-item">
           <div class="info-label">Username</div>
           <div class="info-value">{{ user.username }}</div>
         </div>
-        
+
         <div class="info-item">
-          <div class="info-label">Email Address</div>
-          <div class="info-value">{{ user.email }}</div>
+          <label class="info-label" for="id_email">Email Address</label>
+          <input id="id_email" name="email" class="info-value" value="{{ user.email }}" />
         </div>
-        
-        {% if user.first_name or user.last_name %}
-          <div class="info-item">
-            <div class="info-label">Full Name</div>
-            <div class="info-value">{{ user.first_name }} {{ user.last_name }}</div>
-          </div>
-        {% endif %}
-        
+
         <div class="info-item">
-          <div class="info-label">Member Since</div>
-          <div class="info-value">{{ user.date_joined|date:"F d, Y" }}</div>
+          <label class="info-label" for="id_first_name">First name</label>
+          <input id="id_first_name" name="first_name" class="info-value" value="{{ user.first_name }}" />
         </div>
-        
+
         <div class="info-item">
-          <div class="info-label">Account Status</div>
-          <div class="info-value">
-            <span style="color: #4caf50;">
-              <i class="bi bi-check-circle-fill"></i> Active
-            </span>
-          </div>
+          <label class="info-label" for="id_last_name">Last name</label>
+          <input id="id_last_name" name="last_name" class="info-value" value="{{ user.last_name }}" />
         </div>
-      </div>
-      
-      <div class="profile-actions">
-        <button class="btn btn-primary" onclick="showNotification('Profile settings coming soon!', 'info')">
-          <i class="bi bi-pencil-square"></i> Edit Profile
-        </button>
-        <a href="{% url 'logout' %}" class="btn btn-danger" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-          <i class="bi bi-box-arrow-right"></i> Logout
-        </a>
-      </div>
+
+        <div class="info-item">
+          <label class="info-label" for="id_phone">Phone</label>
+          {{ form.phone }}
+        </div>
+
+        <div class="info-item">
+          <label class="info-label" for="id_location">Location</label>
+          {{ form.location }}
+        </div>
+
+        <div class="profile-actions">
+          <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save Changes</button>
+          <a href="{% url 'password_change' %}" class="btn" style="background:#444;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;">Change Password</a>
+          <a href="{% url 'logout' %}" class="btn btn-danger" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Logout</a>
+        </div>
+      </form>
     </div>
   {% else %}
     <div class="login-redirect">

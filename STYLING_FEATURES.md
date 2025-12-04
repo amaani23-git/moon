@@ -5,6 +5,7 @@
 ### 1. Advanced CSS Styling (`static/css/advanced.css`)
 
 #### Core Features:
+
 - **Smooth Scroll Behavior** - Smooth scroll throughout the entire site
 - **Page Transitions** - Elegant fade-in animations on page load
 - **Navigation Enhancements** - Sticky navigation with underline animations on hover/active states

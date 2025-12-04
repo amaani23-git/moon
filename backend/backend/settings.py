@@ -92,7 +92,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Look for static files in backend/static and also in the project root (so existing top-level
 # `images/` and other assets remain available during development).
-STATICFILES_DIRS = [BASE_DIR / 'static', BASE_DIR.parent]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  
