@@ -38,6 +38,49 @@ moon/
    docker-compose up --build
    ```
 
+### Local development without Docker
+
+1. Create a virtualenv and install requirements:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+```
+
+2. Create a `.env` file from `.env.example`:
+
+```bash
+cp .env.example .env
+# edit .env with local values (optional)
+```
+
+3. Run migrations and start the dev server:
+
+```bash
+set PYTHONPATH=backend
+set DJANGO_SETTINGS_MODULE=backend.settings
+.venv\Scripts\python.exe backend\manage.py migrate
+.venv\Scripts\python.exe backend\manage.py runserver
+```
+
+### Email configuration
+
+By default the project uses the console email backend for local development. To send real emails in production:
+
+1. Copy `.env.example` to `.env` and set SMTP values (or export the environment variables):
+
+```bash
+cp .env.example .env
+# edit .env and set EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, DEFAULT_FROM_EMAIL, ADMIN_EMAIL
+```
+
+2. Ensure `DJANGO_EMAIL_BACKEND` is set to `django.core.mail.backends.smtp.EmailBackend`.
+
+3. Restart the application. When a contact message or service request is submitted, an email will be sent to the address configured in `ADMIN_EMAIL`.
+
+Note: For quick testing you can leave `DJANGO_EMAIL_BACKEND` unset and emails will be printed to the console.
+
 ## Production Deployment
 
 1. Set up your environment variables:
