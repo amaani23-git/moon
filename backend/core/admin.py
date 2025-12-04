@@ -27,11 +27,13 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'completed')
+    list_display = ('title', 'completed', 'created_at')
     list_editable = ('completed',)
     search_fields = ('title',)
-    list_filter = ('completed',)
-    ordering = ('-id',)
+    list_filter = ('completed', 'created_at')
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at', 'updated_at')
     list_per_page = 25
 
     actions = ('mark_completed', 'mark_not_completed')

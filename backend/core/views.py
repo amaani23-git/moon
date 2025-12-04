@@ -5,7 +5,7 @@ from .models import Service, Project, ServiceRequest, ContactMessage
 def index(request):
     """Render the main landing page with services and projects."""
     services = Service.objects.filter(active=True).order_by('title')
-    projects = Project.objects.all().order_by('-created_at')
+    projects = Project.objects.all()
 
     # Simple form handling for service requests and contact messages
     if request.method == 'POST':
