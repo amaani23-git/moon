@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import RegistrationForm
 from .models import Service, Project, ServiceRequest, ContactMessage
 
 
@@ -42,23 +43,16 @@ def index(request):
 
 def register(request):
     """Handle user registration."""
-    # Use Django's UserCreationForm to handle validation and password hashing
+    # Use our RegistrationForm (extends UserCreationForm with extra fields)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            # Optional email field (not included in UserCreationForm by default)
-            email = request.POST.get('email', '').strip()
-            if email:
-                user.email = email
-            user.save()
+            user = form.save()
             login(request, user)
             return redirect('core:index')
-        # if form invalid, fall through to re-render with errors
         return render(request, 'registration/register.html', {'form': form})
 
-    # GET - show blank form
-    form = UserCreationForm()
+    form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
